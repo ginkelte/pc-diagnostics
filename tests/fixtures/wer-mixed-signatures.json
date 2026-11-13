@@ -1,0 +1,85 @@
+{
+  "fixture": "wer-mixed-signatures",
+  "logs": {
+    "Application": [
+      {
+        "TimeCreated": "2026-11-14T09:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpM.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpM\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpM.exe",
+          "AppPath": "C:\\Apps\\dumpM.exe",
+          "P1": "dumpM.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-14T09:05:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpM.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpM\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpM.exe",
+          "AppPath": "C:\\Apps\\dumpM.exe",
+          "P1": "dumpM.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-15T09:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Fault bucket , type 0. Event Name: APPCRASH. Response: Not available. Cab Id: 0. Problem signature: P1: gamma.exe P2: 1.2.3.4 P3: 0x00000003",
+        "Data": {
+          "AppName": "gamma.exe",
+          "AppPath": "C:\\Apps\\gamma.exe",
+          "P1": "gamma.exe",
+          "P2": "1.2.3.4",
+          "P3": "0x00000003",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": "",
+          "P9": "",
+          "P10": ""
+        }
+      },
+      {
+        "TimeCreated": "2026-11-15T09:10:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Fault bucket , type 0. Event Name: APPCRASH. Response: Not available. Cab Id: 0. Problem signature: P1: gamma.exe P2: 1.2.3.4 P3: 0x00000003",
+        "Data": {
+          "AppName": "gamma.exe",
+          "AppPath": "C:\\Apps\\gamma.exe",
+          "P1": "gamma.exe",
+          "P2": "1.2.3.4",
+          "P3": "0x00000003",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": "",
+          "P9": "",
+          "P10": ""
+        }
+      },
+      {
+        "TimeCreated": "2026-11-16T09:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Windows Error Reporting report queued with no diagnostics attached.",
+        "Data": {}
+      }
+    ]
+  }
+}

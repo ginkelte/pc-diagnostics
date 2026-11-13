@@ -1,0 +1,17 @@
+{
+  "fixture": "offprovider-source",
+  "logs": {
+    "System": [
+      {
+        "TimeCreated": "2026-11-05T09:00:00-03:00",
+        "Id": 19,
+        "ProviderName": "WindowsUpdateClient",
+        "Level": "Information",
+        "Message": "Installation Successful: update installed.",
+        "Data": {
+          "updateTitle": "2026-11 Cumulative Update (KB0000000)"
+        }
+      }
+    ]
+  }
+}

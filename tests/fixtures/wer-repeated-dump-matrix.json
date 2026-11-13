@@ -1,0 +1,2485 @@
+{
+  "fixture": "wer-repeated-dump-matrix",
+  "logs": {
+    "Application": [
+      {
+        "TimeCreated": "2026-11-04T04:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:04:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:08:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:08:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:12:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:16:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:16:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:20:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:24:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:24:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:28:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:32:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:32:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:36:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:40:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:40:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:44:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:48:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:48:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:52:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T04:56:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:01:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:01:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:05:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:09:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:09:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:13:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:17:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:17:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:21:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:25:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:25:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:29:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:33:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:33:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:37:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:41:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:41:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:45:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:49:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:49:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:53:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T05:57:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:02:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:02:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:06:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:10:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:10:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:14:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:18:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:18:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:22:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:26:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:26:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:30:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:34:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:34:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:38:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:42:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:42:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:46:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:50:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:50:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:54:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T06:58:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:03:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:03:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:07:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:11:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:11:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:15:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:19:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:19:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:23:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:27:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:27:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:31:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:35:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:35:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:39:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:43:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:43:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:47:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:51:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:51:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:55:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T07:59:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:04:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:04:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:08:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:12:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:12:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:16:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:20:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:20:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:24:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:28:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:28:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:32:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:36:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:36:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:40:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:44:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:44:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:48:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:52:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:52:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T08:56:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:01:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:05:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:05:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:09:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:13:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:13:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:17:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:21:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:21:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:25:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:29:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:29:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:33:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:37:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:37:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:41:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:45:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:45:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:49:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:53:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T09:57:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:02:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:06:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:06:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:10:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:14:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:14:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:18:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:22:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:22:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:26:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:30:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:30:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:34:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:38:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:38:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:42:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:46:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:46:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:50:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:54:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T10:58:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:03:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:07:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:07:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:11:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:15:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:15:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:19:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:23:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:23:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:27:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:31:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:31:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:35:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:39:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:39:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:43:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:47:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:47:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:51:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:55:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-04T11:59:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpA.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpA\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpA.exe",
+          "AppPath": "C:\\Apps\\dumpA.exe",
+          "P1": "dumpA.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-07T06:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpB.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpB\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpB.exe",
+          "AppPath": "C:\\Apps\\dumpB.exe",
+          "P1": "dumpB.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-07T06:01:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpB.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpB\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpB.exe",
+          "AppPath": "C:\\Apps\\dumpB.exe",
+          "P1": "dumpB.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-08T07:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpC.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpC\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpC.exe",
+          "AppPath": "C:\\Apps\\dumpC.exe",
+          "P1": "dumpC.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-09T08:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Faulting application name: dumpD.exe, version: 1.0.0.0. Event Name: APPCRASH. Attached files: C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_dumpD\\Report.wer.dmp",
+        "Data": {
+          "AppName": "dumpD.exe",
+          "AppPath": "C:\\Apps\\dumpD.exe",
+          "P1": "dumpD.exe",
+          "P2": "1.0.0.0",
+          "P3": "00000000"
+        }
+      }
+    ]
+  }
+}

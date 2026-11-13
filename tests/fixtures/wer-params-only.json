@@ -1,0 +1,133 @@
+{
+  "fixture": "wer-params-only",
+  "logs": {
+    "Application": [
+      {
+        "TimeCreated": "2026-11-10T10:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Fault bucket , type 0. Event Name: APPCRASH. Response: Not available. Cab Id: 0. Problem signature: P1: alpha.exe P2: 2.1.0.0 P3: 0x00000001",
+        "Data": {
+          "AppName": "alpha.exe",
+          "AppPath": "C:\\Apps\\alpha.exe",
+          "P1": "alpha.exe",
+          "P2": "2.1.0.0",
+          "P3": "0x00000001",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": "",
+          "P9": "",
+          "P10": ""
+        }
+      },
+      {
+        "TimeCreated": "2026-11-10T10:01:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Fault bucket , type 0. Event Name: APPCRASH. Response: Not available. Cab Id: 0. Problem signature: P1: alpha.exe P2: 2.1.0.0 P3: 0x00000001",
+        "Data": {
+          "AppName": "alpha.exe",
+          "AppPath": "C:\\Apps\\alpha.exe",
+          "P1": "alpha.exe",
+          "P2": "2.1.0.0",
+          "P3": "0x00000001",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": "",
+          "P9": "",
+          "P10": ""
+        }
+      },
+      {
+        "TimeCreated": "2026-11-10T10:02:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Fault bucket , type 0. Event Name: APPCRASH. Response: Not available. Cab Id: 0. Problem signature: P1: alpha.exe P2: 2.1.0.0 P3: 0x00000001",
+        "Data": {
+          "AppName": "alpha.exe",
+          "AppPath": "C:\\Apps\\alpha.exe",
+          "P1": "alpha.exe",
+          "P2": "2.1.0.0",
+          "P3": "0x00000001",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": "",
+          "P9": "",
+          "P10": ""
+        }
+      },
+      {
+        "TimeCreated": "2026-11-10T10:03:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Fault bucket , type 0. Event Name: APPCRASH. Response: Not available. Cab Id: 0. Problem signature: P1: alpha.exe P2: 2.1.0.0 P3: 0x00000001",
+        "Data": {
+          "AppName": "alpha.exe",
+          "AppPath": "C:\\Apps\\alpha.exe",
+          "P1": "alpha.exe",
+          "P2": "2.1.0.0",
+          "P3": "0x00000001",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": "",
+          "P9": "",
+          "P10": ""
+        }
+      },
+      {
+        "TimeCreated": "2026-11-11T11:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Fault bucket , type 0. Event Name: APPCRASH. Response: Not available. Cab Id: 0. Problem signature: P1: beta.exe P2: 3.4.5.6 P3: 0x00000002",
+        "Data": {
+          "AppName": "beta.exe",
+          "AppPath": "C:\\Apps\\beta.exe",
+          "P1": "beta.exe",
+          "P2": "3.4.5.6",
+          "P3": "0x00000002",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": "",
+          "P9": "",
+          "P10": ""
+        }
+      },
+      {
+        "TimeCreated": "2026-11-11T11:05:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Fault bucket , type 0. Event Name: APPCRASH. Response: Not available. Cab Id: 0. Problem signature: P1: beta.exe P2: 3.4.5.6 P3: 0x00000002",
+        "Data": {
+          "AppName": "beta.exe",
+          "AppPath": "C:\\Apps\\beta.exe",
+          "P1": "beta.exe",
+          "P2": "3.4.5.6",
+          "P3": "0x00000002",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": "",
+          "P9": "",
+          "P10": ""
+        }
+      }
+    ]
+  }
+}

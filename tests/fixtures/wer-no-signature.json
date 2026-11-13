@@ -1,0 +1,31 @@
+{
+  "fixture": "wer-no-signature",
+  "logs": {
+    "Application": [
+      {
+        "TimeCreated": "2026-11-12T12:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Windows Error Reporting report queued with no diagnostics attached.",
+        "Data": {}
+      },
+      {
+        "TimeCreated": "2026-11-12T12:30:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Windows Error Reporting report queued with no diagnostics attached.",
+        "Data": {}
+      },
+      {
+        "TimeCreated": "2026-11-13T13:00:00-03:00",
+        "Id": 1001,
+        "ProviderName": "Windows Error Reporting",
+        "Level": "Information",
+        "Message": "Windows Error Reporting report queued with no diagnostics attached.",
+        "Data": {}
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DxDiag>
+  <SystemInformation>
+    <OperatingSystem>Windows 10 Pro 64-bit (10.0, Build 19045)</OperatingSystem>
+    <Processor>AMD Ryzen 5 5600X 6-Core Processor (12 CPUs), ~3.7GHz</Processor>
+    <Memory>16384MB RAM</Memory>
+  </SystemInformation>
+  <DisplayDevices>
+    <DisplayDevice>
+      <CardName>AMD Radeon RX 6600</CardName>
+      <DriverVersion>31.0.12027.9001</DriverVersion>
+      <DriverDate>2/15/2025 21:00:00</DriverDate>
+    </DisplayDevice>
+  </DisplayDevices>
+</DxDiag>

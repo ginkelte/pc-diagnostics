@@ -1,0 +1,16 @@
+# Run artifacts: a diagnostics report describes one machine and must never be
+# committed. Reports and state land in -OutputDir, which defaults to .\reports.
+reports/
+pc-diagnostics-*.txt
+# root-anchored: the dxdiag fixtures under tests/fixtures must stay tracked
+/dxdiag-*.xml
+state.json
+state.json.tmp
+state.json.corrupt-*
+*.tmp
+
+# Editor and OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DxDiag>
+  <SystemInformation>
+    <OperatingSystem>Windows 11 Pro 64-bit (10.0, Build 26200) — Sistema de «JoSé's PC»</OperatingSystem>
+    <Processor>Intel(R) Core(TM) i7-11700 @ 2.50GHz (16 CPUs), ~2.5GHz</Processor>
+    <Memory>32768MB RAM</Memory>
+    <DirectXVersion>12</DirectXVersion>
+  </SystemInformation>
+  <DisplayDevices>
+    <DisplayDevice>
+      <CardName>Intel(R) UHD Graphics 750</CardName>
+      <ChipType>Intel(R) UHD Graphics Family</ChipType>
+      <DedicatedMemory>128 MB</DedicatedMemory>
+      <DriverVersion>31.0.101.2134</DriverVersion>
+      <DriverDate>5/3/2024 21:00:00</DriverDate>
+      <CurrentMode>1920 x 1080 (32 bit) (60Hz)</CurrentMode>
+    </DisplayDevice>
+    <DisplayDevice>
+      <CardName>NVIDIA GeForce RTX 5070 &quot;Gaming OC&quot; — Edición española</CardName>
+      <ChipType>GeForce RTX 5070</ChipType>
+      <DedicatedMemory>11943 MB</DedicatedMemory>
+      <DriverVersion>32.0.16.2124</DriverVersion>
+      <DriverDate>6/11/2026 21:00:00</DriverDate>
+      <CurrentMode>1920 x 1080 (32 bit) (144Hz)</CurrentMode>
+    </DisplayDevice>
+  </DisplayDevices>
+</DxDiag>
