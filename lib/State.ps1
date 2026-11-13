@@ -44,15 +44,32 @@ function Test-DiagStateCompatible {
     <#
       Structural check. A syntactically valid file with a missing key is as
       unusable as a truncated one: a half-read baseline is worse than none.
+
+      Presence, not nullity, is what is checked. An empty array is a legitimate
+      value for volumes[], nvme[] and wer.signatures[] (section 7.2 allows it,
+      EC-02 stores "nvme": []), and PowerShell unrolls an empty collection in a
+      property read, so a value test would reject a state this very build wrote.
+      An absent key still rejects, and schema_version stays strictly validated.
     #>
     param($State)
     if ($null -eq $State) { return $false }
-    $version = Get-DiagPropValue -Object $State -Name 'schema_version' -Default $null
+
+    $names = @()
+    try { $names = @($State.PSObject.Properties.Name) } catch { $names = @() }
+    if ($names.Count -eq 0) { return $false }
+
+    if (-not ($names -contains 'schema_version')) { return $false }
+    $version = $null
+    try { $version = $State.PSObject.Properties['schema_version'].Value } catch { $version = $null }
     if ($null -eq $version) { return $false }
-    if ([int]$version -ne $script:DiagStateSchemaVersion) { return $false }
+    try {
+        if ([int]$version -ne $script:DiagStateSchemaVersion) { return $false }
+    } catch {
+        return $false
+    }
+
     foreach ($required in @('last_run_at', 'last_run_mode', 'host', 'window_days', 'counters', 'wer', 'volumes')) {
-        $value = Get-DiagPropValue -Object $State -Name $required -Default $null
-        if ($null -eq $value) { return $false }
+        if (-not ($names -contains $required)) { return $false }
     }
     return $true
 }
@@ -384,17 +401,22 @@ function Compare-DiagState {
         $reason = 'host changed (' + $previousHost + ' -> ' + $currentHost + ')'
     }
 
-    $lastRunText = Get-DiagPropValue -Object $Previous -Name 'last_run_at' -Default $null
-    if (-not [string]::IsNullOrWhiteSpace([string]$lastRunText)) {
-        try {
-            $lastRun = [datetime]$lastRunText
-            if ($lastRun -gt (Get-Date)) {
-                $baselineUsable = $false
-                $reason = 'previous last_run_at is in the future'
-            }
-        } catch {
+    # last_run_at reaches this function in either shape: an ISO 8601 string when
+    # the state object was built in memory, or a [datetime] when it came out of
+    # ConvertFrom-Json. A [string] cast would reformat it with the current
+    # culture and could land in the "unparsable" branch, which would silently
+    # disable the baseline (and with it every delta). ConvertTo-DiagDateTime
+    # accepts both and normalises the Kind, so a future timestamp is still
+    # detected as one.
+    $lastRunRaw = Get-DiagPropValue -Object $Previous -Name 'last_run_at' -Default $null
+    if (-not [string]::IsNullOrWhiteSpace([string]$lastRunRaw)) {
+        $lastRun = ConvertTo-DiagDateTime -Value $lastRunRaw
+        if ($null -eq $lastRun) {
             $baselineUsable = $false
             $reason = 'previous last_run_at is unparsable'
+        } elseif ($lastRun -gt (Get-Date)) {
+            $baselineUsable = $false
+            $reason = 'previous last_run_at is in the future'
         }
     }
 
