@@ -193,8 +193,20 @@ if ($Mode -eq 'Full') {
     $reportPath = Get-DiagUniquePath -Path $reportPath
     $snapshot.meta | Add-Member -NotePropertyName 'ReportPath' -NotePropertyValue $reportPath -Force
 
+    # The renderer returns the lines; writing is the entry point's job (section
+    # 4.2). UTF-8 without a BOM and CRLF line endings (RF-03, RNF-05), and a
+    # zero-byte report is a defect, so an empty body exits 2 instead.
     try {
-        New-FullReport -Snapshot $snapshot -Path $reportPath
+        $reportLines = @(New-FullReport -Snapshot $snapshot -Path $reportPath)
+        if ($reportLines.Count -eq 0) {
+            throw (New-Object System.Exception('renderer returned no lines'))
+        }
+        $reportText = ($reportLines -join "`r`n") + "`r`n"
+        $reportEncoding = New-Object System.Text.UTF8Encoding($false)
+        [System.IO.File]::WriteAllText($reportPath, $reportText, $reportEncoding)
+        if ((Get-Item -LiteralPath $reportPath -ErrorAction Stop).Length -le 0) {
+            throw (New-Object System.Exception('report file is empty'))
+        }
     } catch {
         Write-DiagFail ('FATAL: could not write the report to ' + $reportPath + ': ' + (Get-DiagErrorText -ErrorRecord $_))
         exit 2

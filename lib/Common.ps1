@@ -143,6 +143,41 @@ function Get-DiagTimestamp {
     return (Get-Date).ToString('yyyy-MM-ddTHH:mm:sszzz', [System.Globalization.CultureInfo]::InvariantCulture)
 }
 
+function ConvertTo-DiagDateTime {
+    <#
+      Normalises a timestamp that arrives either as a string (JSON on a cold read)
+      or as a [datetime] (ConvertFrom-Json materialises an ISO 8601 string into a
+      DateTime, so the "obvious" [string] cast silently changes the format and,
+      under a non-invariant culture, the value).
+
+      Returns $null when the value is absent or unparsable, so the caller renders
+      "unavailable" or "no baseline" instead of comparing against a guessed date.
+      RoundtripKind keeps the offset, and a UTC value is converted to local time
+      before any window comparison because .NET compares Ticks and ignores Kind.
+    #>
+    param($Value)
+    if ($null -eq $Value) { return $null }
+
+    $dt = $null
+    if ($Value -is [datetime]) {
+        $dt = [datetime]$Value
+    } elseif ($Value -is [System.DateTimeOffset]) {
+        $dt = $Value.LocalDateTime
+    } else {
+        $text = [string]$Value
+        if ([string]::IsNullOrWhiteSpace($text)) { return $null }
+        try {
+            $dt = [datetime]::Parse($text.Trim(), [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::RoundtripKind)
+        } catch {
+            $dt = $null
+        }
+    }
+
+    if ($null -eq $dt) { return $null }
+    if ($dt.Kind -eq [System.DateTimeKind]::Utc) { $dt = $dt.ToLocalTime() }
+    return $dt
+}
+
 function Get-DiagFileNameStamp {
     param([datetime]$Date)
     if ($PSBoundParameters.ContainsKey('Date')) {
@@ -656,8 +691,10 @@ function New-DiagSnapshot {
     if ($null -ne $Previous) {
         $previousLastRun = Get-DiagPropValue -Object $Previous -Name 'last_run_at' -Default $null
         $previousHost = [string](Get-DiagPropValue -Object $Previous -Name 'host' -Default '')
+        # Accepts both shapes the state can have in memory: an ISO string or the
+        # DateTime ConvertFrom-Json produced (see ConvertTo-DiagDateTime).
         if (-not [string]::IsNullOrWhiteSpace([string]$previousLastRun)) {
-            try { $previousLastRunDate = [datetime]$previousLastRun } catch { $previousLastRunDate = $null }
+            $previousLastRunDate = ConvertTo-DiagDateTime -Value $previousLastRun
         }
         if ($null -eq $previousLastRunDate) {
             $baselineReason = 'none (first run)'
