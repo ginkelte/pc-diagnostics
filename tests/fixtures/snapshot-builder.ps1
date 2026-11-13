@@ -184,6 +184,62 @@ function New-TestSmart {
     }
 }
 
+function New-TestNvmeLog {
+    <#
+      One 512-byte NVMe SMART/Health Information log page (log page 02h) with
+      values chosen so every field can be checked by hand:
+
+        byte    0      critical warning        1
+        bytes   1-2    composite temperature   315 K (0x013B) -> 42 C
+        byte    3      available spare         100 %
+        byte    4      spare threshold         10 %
+        byte    5      percentage used         7 %
+        bytes  32-47   data units read         1000
+        bytes  48-63   data units written      all 16 bytes FFh: the 128-bit
+                                               value is far beyond 64 bits, so
+                                               it must saturate, not wrap
+        bytes  64-79   host read commands      1234567890123456  (fits, exact)
+        bytes  80-95   host write commands     987654321
+        bytes  96-111  controller busy time    4242 minutes
+        bytes 112-127  power cycles            42
+        bytes 128-143  power-on hours          12345
+        bytes 144-159  unsafe shutdowns        3
+        bytes 160-175  media errors            2
+        bytes 176-191  error log entries       5
+
+      Bytes the parser does not read stay 0.
+    #>
+    $bytes = New-Object byte[] 512
+
+    # 64-bit little-endian writer; the 128-bit saturation case is written by hand.
+    $putUInt64 = {
+        param([byte[]]$Buffer, [int]$Offset, [long]$Value)
+        for ($i = 0; $i -lt 8; $i++) {
+            $Buffer[$Offset + $i] = [byte](($Value -shr (8 * $i)) -band 0xFF)
+        }
+    }
+
+    $bytes[0] = 1                        # critical warning
+    $bytes[1] = 0x3B                     # temperature 315 K, low byte
+    $bytes[2] = 0x01                     # temperature 315 K, high byte
+    $bytes[3] = 100                      # available spare %
+    $bytes[4] = 10                       # available spare threshold %
+    $bytes[5] = 7                        # percentage used %
+
+    & $putUInt64 $bytes 32 ([long]1000)                    # data units read
+    for ($i = 48; $i -lt 64; $i++) { $bytes[$i] = 0xFF }   # data units written
+    & $putUInt64 $bytes 64 ([long]1234567890123456)        # host read commands
+    & $putUInt64 $bytes 80 ([long]987654321)               # host write commands
+    & $putUInt64 $bytes 96 ([long]4242)                    # controller busy
+    & $putUInt64 $bytes 112 ([long]42)                     # power cycles
+    & $putUInt64 $bytes 128 ([long]12345)                  # power-on hours
+    & $putUInt64 $bytes 144 ([long]3)                      # unsafe shutdowns
+    & $putUInt64 $bytes 160 ([long]2)                      # media errors
+    & $putUInt64 $bytes 176 ([long]5)                      # error log entries
+
+    return ,$bytes
+}
+
 function New-TestSnapshot {
     <#
       A complete snapshot object. Without -Full every section is present but

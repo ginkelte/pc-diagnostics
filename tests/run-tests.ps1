@@ -500,6 +500,117 @@ function Test-T08NvmeDiskNumberRefused {
     }
 }
 
+function Test-T09NvmeLogLayoutAndParser {
+    <#
+      The NVMe query struct had Version and Size (members of the *output*
+      descriptor) written into the input, which shifted every field by 8 bytes:
+      the driver saw ProtocolType=1 (SCSI) and DataType=48, DeviceIoControl
+      failed, and every NVMe field was "unavailable" on every machine.
+
+      Two independent checks:
+        1. the offsets the C# wrapper writes, read out of lib/Collect-Storage.ps1
+           (a host-independent guard against the 8-byte shift coming back);
+        2. the parser, against a 512-byte fixture with hand-checkable values -
+           which the old code could not do at all, because the stub replaced the
+           whole function including the parsing.
+    #>
+    Reset-TestEnvironment
+
+    # --- 1. the input buffer the wrapper builds ---------------------------
+    $libPath = Join-Path -Path (Join-Path -Path $script:RepoRoot -ChildPath 'lib') -ChildPath 'Collect-Storage.ps1'
+    $libText = [System.IO.File]::ReadAllText($libPath)
+    $start = $libText.IndexOf('public static byte[] QueryHealthLog')
+    Assert-GreaterOrEqual $start 0 'the interop wrapper is where it is expected'
+    $end = $libText.IndexOf('CloseHandle(handle);', $start)
+    Assert-GreaterOrEqual $end 0 'the wrapper body has an end'
+
+    $body = $libText.Substring($start, $end - $start)
+    $inputSize = -1
+    $inputMatch = [regex]::Match($body, 'byte\[\] input = new byte\[(\d+)\]')
+    Assert-True $inputMatch.Success 'the wrapper declares an input buffer'
+    if ($inputMatch.Success) { $inputSize = [int]$inputMatch.Groups[1].Value }
+    Assert-Equal 48 $inputSize 'the input buffer is STORAGE_PROPERTY_QUERY (8) + STORAGE_PROTOCOL_SPECIFIC_DATA (40)'
+
+    # Rebuild the buffer from the Put calls the source actually performs, so the
+    # assertion is about what runs, not about a literal in a comment.
+    $buffer = New-Object byte[] ([math]::Max($inputSize, 1))
+    foreach ($m in [regex]::Matches($body, 'Put\(input,\s*(\d+),\s*(\d+)\)')) {
+        $offset = [int]$m.Groups[1].Value
+        $value = [long]$m.Groups[2].Value
+        for ($i = 0; $i -lt 4; $i++) {
+            if (($offset + $i) -lt $buffer.Length) { $buffer[$offset + $i] = [byte](($value -shr (8 * $i)) -band 0xFF) }
+        }
+    }
+    $readUInt = {
+        param([byte[]]$Bytes, [int]$Offset)
+        if ($Offset + 4 -gt $Bytes.Length) { return -1 }
+        return ([long]$Bytes[$Offset] + ([long]$Bytes[$Offset + 1] * 256) + ([long]$Bytes[$Offset + 2] * 65536) + ([long]$Bytes[$Offset + 3] * 16777216))
+    }
+
+    Assert-Equal 49 (& $readUInt $buffer 0) 'PropertyId is StorageDeviceProtocolSpecificProperty'
+    Assert-Equal 0 (& $readUInt $buffer 4) 'QueryType is PropertyStandardQuery'
+    Assert-Equal 3 (& $readUInt $buffer 8) 'PROTOCOL_TYPE at abs 8 is Nvme, not a shifted Version'
+    Assert-Equal 2 (& $readUInt $buffer 12) 'DATA_TYPE at abs 12 is a log page, not a shifted Size of 48'
+    Assert-Equal 2 (& $readUInt $buffer 16) 'the log page requested is SMART / Health Information'
+    Assert-Equal 0 (& $readUInt $buffer 20) 'the request sub value is 0'
+    Assert-Equal 40 (& $readUInt $buffer 24) 'ProtocolDataOffset is 40: relative to the struct, not to the buffer'
+    Assert-Equal 512 (& $readUInt $buffer 28) 'ProtocolDataLength is one log page'
+    foreach ($offset in @(32, 36, 40, 44)) {
+        Assert-Equal 0 (& $readUInt $buffer $offset) ('the tail of the struct at abs ' + [string]$offset + ' is 0')
+    }
+
+    $outMatch = [regex]::Match($body, 'byte\[\] output = new byte\[(\d+)\]')
+    Assert-True $outMatch.Success 'the wrapper declares an output buffer'
+    if ($outMatch.Success) {
+        Assert-Equal 560 ([int]$outMatch.Groups[1].Value) 'the output buffer holds the descriptor (8) + struct (40) + the log page'
+    }
+    Assert-Match $body 'BlockCopy\(output,\s*48,' 'the log page is copied from offset 48, after the descriptor and the struct'
+
+    # --- 2. the parser ----------------------------------------------------
+    $bytes = New-TestNvmeLog
+    Assert-Equal 512 $bytes.Length 'the fixture is exactly one log page'
+
+    $log = ConvertFrom-NvmeHealthLog -Bytes $bytes
+    Assert-NotNull $log 'a 512-byte log parses'
+    Assert-Equal 1 $log.CriticalWarning 'byte 0 is the critical warning'
+    Assert-Equal 315 $log.TemperatureK 'bytes 1-2 are the composite temperature in Kelvin, little endian'
+    Assert-Equal 42 $log.TemperatureC '315 K is 42 C'
+    Assert-Equal 100 $log.AvailableSparePct 'byte 3 is the available spare percentage'
+    Assert-Equal 10 $log.AvailableSpareThresholdPct 'byte 4 is the available spare threshold'
+    Assert-Equal 7 $log.PercentageUsed 'byte 5 is percentage used (wear)'
+    Assert-Equal 1000 $log.DataUnitsRead 'bytes 32-47 are data units read'
+    Assert-Equal 9007199254740991 $log.DataUnitsWritten 'an all-FF 128-bit field saturates instead of wrapping to a negative number'
+    Assert-Equal 1234567890123456 $log.HostReadCommands 'bytes 64-79 are host read commands, exact above 32 bits'
+    Assert-Equal 987654321 $log.HostWriteCommands 'bytes 80-95 are host write commands'
+    Assert-Equal 4242 $log.ControllerBusyMinutes 'bytes 96-111 are controller busy minutes'
+    Assert-Equal 42 $log.PowerCycles 'bytes 112-127 are power cycles'
+    Assert-Equal 12345 $log.PowerOnHours 'bytes 128-143 are power-on hours'
+    Assert-Equal 3 $log.UnsafeShutdowns 'bytes 144-159 are unsafe shutdowns'
+    Assert-Equal 2 $log.MediaErrors 'bytes 160-175 are media and data integrity errors'
+    Assert-Equal 5 $log.ErrorLogEntries 'bytes 176-191 are the error information log entries'
+
+    # A zeroed log is a real zero for the byte fields, but 0 K is not a
+    # temperature: it stays unavailable rather than becoming -273 C.
+    $zeroed = ConvertFrom-NvmeHealthLog -Bytes (New-Object byte[] 512)
+    Assert-Equal 0 $zeroed.CriticalWarning 'a zeroed log parses a real 0'
+    Assert-Null $zeroed.TemperatureC '0 K is not reported as a temperature'
+
+    # Wrong sizes are refused, never half-parsed and never thrown on.
+    Assert-Null (ConvertFrom-NvmeHealthLog -Bytes (New-Object byte[] 511)) 'a 511-byte log is refused'
+    Assert-Null (ConvertFrom-NvmeHealthLog -Bytes (New-Object byte[] 513)) 'a 513-byte log is refused'
+    Assert-Null (ConvertFrom-NvmeHealthLog -Bytes (New-Object byte[] 0)) 'an empty buffer is refused'
+    Assert-Null (ConvertFrom-NvmeHealthLog -Bytes $null) 'no buffer is no log'
+    Assert-NoThrow { $null = ConvertFrom-NvmeHealthLog -Bytes (New-Object byte[] 7) } 'a short buffer never throws'
+
+    # --- 3. the split is wired: fetch is stubbed, the parser is real ------
+    $null = Set-PcDiagFixtureObject -Fixture ([pscustomobject]@{ nvme_health_log = $true })
+    $smart = Get-NvmeSmart -DiskNumber 5
+    Assert-True $smart.HasHealthLog 'a fetched log reaches the real parser inside Get-NvmeSmart'
+    Assert-Equal 0 $smart.CriticalWarning 'the zeroed stub log yields a real 0, not unavailable'
+    Assert-Null $smart.TemperatureC 'the zeroed stub log yields no temperature'
+    Assert-Equal 5 ([int](Get-PcDiagLastCall -Cmdlet 'Get-NvmeHealthLog').Arguments.DiskNumber) 'the fetch received the disk number it was asked for'
+}
+
 # ===========================================================================
 # Renderers (RF-27, RF-16, RF-28)
 # ===========================================================================
@@ -1043,6 +1154,7 @@ $script:TestCases = @(
     @{ Name = 'T06b-wer-accounting';           Run = { Test-T06bWerAccounting } },
     @{ Name = 'T07-listing-cap-and-size';      Run = { Test-T07ListingCapAndSize } },
     @{ Name = 'T08-nvme-disk-number-refused';  Run = { Test-T08NvmeDiskNumberRefused } },
+    @{ Name = 'T09-nvme-log-layout-and-parser'; Run = { Test-T09NvmeLogLayoutAndParser } },
     @{ Name = 'T10-unavailable-not-zero';      Run = { Test-T10UnavailableNotZero } },
     @{ Name = 'T10b-bugcheck-failed-query';    Run = { Test-T10bBugcheckFailedQuery } },
     @{ Name = 'T11-listing-truncation';        Run = { Test-T11ListingTruncation } },

@@ -428,9 +428,11 @@ function Get-StorageReliabilityCounter {
 
 function Get-NvmeHealthLog {
     <#
-      Overrides the real function (Collect-Storage.ps1) with fixture data: a
-      512-byte zeroed buffer when the fixture says the health log exists, $null
-      otherwise, which is the "no NVMe health log" case of RF-09.
+      Replaces only the fetch (the DeviceIoControl P/Invoke in
+      Collect-Storage.ps1) with fixture data: a 512-byte zeroed log page when
+      the fixture says the health log exists, $null otherwise, which is the
+      "no NVMe health log" case of RF-09. The real ConvertFrom-NvmeHealthLog
+      still runs, so the offsets are exercised instead of bypassed.
     #>
     param([Parameter(Mandatory = $true)][int]$DiskNumber)
 

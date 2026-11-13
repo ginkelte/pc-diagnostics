@@ -19,20 +19,34 @@
 #    5        percentage used (endurance), percent - NOT a health percentage
 #    32..47   data units read
 #    48..63   data units written
+#    64..79   host read commands
+#    80..95   host write commands
+#    96..111  controller busy time, minutes
+#    112..127 power cycles
 #    128..143 power-on hours, 128-bit little endian
 #    144..159 unsafe shutdowns, 128-bit little endian
 #    160..175 media and data integrity errors, 128-bit little endian
+#    176..191 number of error information log entries
 #
 # A log shorter than 176 bytes cannot supply the last three fields and is
-# treated as absent (RF-09).
+# treated as absent (RF-09). The page itself is 512 bytes.
 # ---------------------------------------------------------------------------
+$script:DiagNvmeLogLength              = 512
 $script:DiagNvmeOffsetCriticalWarning   = 0
 $script:DiagNvmeOffsetTemperature       = 1
 $script:DiagNvmeOffsetAvailableSpare    = 3
+$script:DiagNvmeOffsetAvailableSpareThreshold = 4
 $script:DiagNvmeOffsetPercentageUsed    = 5
+$script:DiagNvmeOffsetDataUnitsRead     = 32
+$script:DiagNvmeOffsetDataUnitsWritten  = 48
+$script:DiagNvmeOffsetHostReadCommands  = 64
+$script:DiagNvmeOffsetHostWriteCommands = 80
+$script:DiagNvmeOffsetControllerBusy    = 96
+$script:DiagNvmeOffsetPowerCycles       = 112
 $script:DiagNvmeOffsetPowerOnHours      = 128
 $script:DiagNvmeOffsetUnsafeShutdowns   = 144
 $script:DiagNvmeOffsetMediaErrors       = 160
+$script:DiagNvmeOffsetErrorLogEntries   = 176
 $script:DiagNvmeMinimumLogLength        = 176
 $script:DiagNvmeKelvinOffset            = 273
 
@@ -80,11 +94,27 @@ public static class PcDiagNvmeInterop
     }
 
     // Returns the 512-byte SMART/Health Information log, or null.
-    // Input buffer: STORAGE_PROPERTY_QUERY (PropertyId=StorageDeviceProtocolSpecificProperty,
-    // QueryType=PropertyStandardQuery) followed by STORAGE_PROTOCOL_SPECIFIC_DATA
-    // (Version 1, Size 48, ProtocolType NVMe, DataType LogPage, request value 02h).
-    // The exact struct packing has to be confirmed against real hardware; the
-    // caller treats null or a short buffer as "no health log" rather than zero.
+    //
+    // Input buffer (48 bytes): STORAGE_PROPERTY_QUERY (8 bytes:
+    // PropertyId=StorageDeviceProtocolSpecificProperty, QueryType=PropertyStandardQuery)
+    // followed by STORAGE_PROTOCOL_SPECIFIC_DATA (40 bytes). That struct has NO
+    // Version and NO Size member - those two belong to
+    // STORAGE_PROTOCOL_DATA_DESCRIPTOR, the output header. Writing them here
+    // shifts every later field by 8 bytes, so the driver reads ProtocolType=1
+    // (SCSI) and an invalid DataType, DeviceIoControl fails, and every NVMe
+    // field is "unavailable" on every machine.
+    //
+    //   offset  8 (abs  8) ProtocolType                 ULONG 3  (NVMe)
+    //   offset  4 (abs 12) DataType                     ULONG 2  (log page)
+    //   offset  8 (abs 16) ProtocolDataRequestValue     ULONG 2  (SMART/health)
+    //   offset 12 (abs 20) ProtocolDataRequestSubValue  ULONG 0
+    //   offset 16 (abs 24) ProtocolDataOffset           ULONG 40 (from struct)
+    //   offset 20 (abs 28) ProtocolDataLength           ULONG 512
+    //   offset 24..36      FixedProtocolReturnData, SubValue2/3/4 = 0
+    //
+    // Output buffer (560 bytes): STORAGE_PROTOCOL_DATA_DESCRIPTOR
+    // (Version + Size, 8 bytes) + STORAGE_PROTOCOL_SPECIFIC_DATA (40 bytes) +
+    // the 512-byte log page, so the log starts at offset 48.
     public static byte[] QueryHealthLog(int diskNumber)
     {
         IntPtr handle = CreateFileW(@"\\.\PhysicalDrive" + diskNumber,
@@ -93,28 +123,29 @@ public static class PcDiagNvmeInterop
         if (handle == IntPtr.Zero || handle.ToInt64() == -1) { return null; }
         try
         {
-            byte[] input = new byte[56];
+            byte[] input = new byte[48];
             Put(input, 0, 49);   // StorageDeviceProtocolSpecificProperty
             Put(input, 4, 0);    // PropertyStandardQuery
-            Put(input, 8, 1);    // STORAGE_PROTOCOL_SPECIFIC_DATA.Version
-            Put(input, 12, 48);  // STORAGE_PROTOCOL_SPECIFIC_DATA.Size
-            Put(input, 16, 3);   // ProtocolTypeNvme
-            Put(input, 20, 2);   // NVMeDataTypeLogPage
-            Put(input, 24, 2);   // log page identifier: SMART/Health Information
-            Put(input, 28, 0);   // request sub value
-            Put(input, 32, 8);   // ProtocolDataOffset
-            Put(input, 36, 512); // ProtocolDataLength
+            Put(input, 8, 3);    // STORAGE_PROTOCOL_SPECIFIC_DATA.ProtocolType = Nvme
+            Put(input, 12, 2);   // .DataType = NVMeDataTypeLogPage
+            Put(input, 16, 2);   // .ProtocolDataRequestValue = SMART/Health log page
+            Put(input, 20, 0);   // .ProtocolDataRequestSubValue
+            Put(input, 24, 40);  // .ProtocolDataOffset, relative to the struct
+            Put(input, 28, 512); // .ProtocolDataLength
+            Put(input, 32, 0);   // .FixedProtocolReturnData
+            Put(input, 36, 0);   // .ProtocolDataRequestSubValue2
+            Put(input, 40, 0);   // .ProtocolDataRequestSubValue3
+            Put(input, 44, 0);   // .ProtocolDataRequestSubValue4
 
-            byte[] output = new byte[4096];
+            byte[] output = new byte[560];
             int returned;
             bool ok = DeviceIoControl(handle, IOCTL_STORAGE_QUERY_PROPERTY,
                 input, input.Length, output, output.Length, out returned, IntPtr.Zero);
-            if (!ok || returned < 512) { return null; }
+            if (!ok || returned < 560) { return null; }
 
-            // The protocol data block sits at the end of the returned buffer;
-            // the fixed STORAGE_PROTOCOL_SPECIFIC_DATA header precedes it.
+            // descriptor header (8) + protocol specific data (40)
             byte[] log = new byte[512];
-            Buffer.BlockCopy(output, returned - 512, log, 0, 512);
+            Buffer.BlockCopy(output, 48, log, 0, 512);
             return log;
         }
         finally
@@ -137,8 +168,10 @@ public static class PcDiagNvmeInterop
 
 function Get-NvmeHealthLog {
     <#
-      Returns the raw 512-byte NVMe health log for a physical disk, or $null when
-      it cannot be read. Never throws (RF-09, section 4.3).
+      Fetch only: returns the raw 512-byte NVMe health log for a physical disk,
+      or $null when it cannot be read. Never throws (RF-09, section 4.3) and
+      never parses - ConvertFrom-NvmeHealthLog does that, so the parser can be
+      tested against a fixture on any host.
     #>
     param([Parameter(Mandatory = $true)][int]$DiskNumber)
 
@@ -172,6 +205,48 @@ function ConvertFrom-DiagUInt128 {
     return [long]$value
 }
 
+function ConvertFrom-NvmeHealthLog {
+    <#
+      Pure parser: a 512-byte NVMe SMART/Health Information log page (log page
+      02h) to fields. No P/Invoke, no I/O, no dependencies on the host, so a
+      fixture covers it on Linux as well as on Windows.
+
+      Returns $null for anything that is not exactly one log page: a partial
+      parse would mix measured bytes with invented zeros, which is the defect
+      class this toolkit refuses (RF-09). Never throws.
+    #>
+    param([byte[]]$Bytes = $null)
+
+    if ($null -eq $Bytes) { return $null }
+    if ($Bytes.Length -ne $script:DiagNvmeLogLength) { return $null }
+
+    # Composite temperature is Kelvin, little endian; 0 means "not reported",
+    # so it stays $null instead of becoming -273 C.
+    $kelvin = ([int]$Bytes[$script:DiagNvmeOffsetTemperature]) +
+              (([int]$Bytes[$script:DiagNvmeOffsetTemperature + 1]) * 256)
+    $temperature = $null
+    if ($kelvin -gt 0) { $temperature = $kelvin - $script:DiagNvmeKelvinOffset }
+
+    return [pscustomobject]@{
+        CriticalWarning           = [int]$Bytes[$script:DiagNvmeOffsetCriticalWarning]
+        TemperatureK              = $kelvin
+        TemperatureC              = $temperature
+        AvailableSparePct         = [int]$Bytes[$script:DiagNvmeOffsetAvailableSpare]
+        AvailableSpareThresholdPct = [int]$Bytes[$script:DiagNvmeOffsetAvailableSpareThreshold]
+        PercentageUsed            = [int]$Bytes[$script:DiagNvmeOffsetPercentageUsed]
+        DataUnitsRead             = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetDataUnitsRead
+        DataUnitsWritten          = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetDataUnitsWritten
+        HostReadCommands          = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetHostReadCommands
+        HostWriteCommands         = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetHostWriteCommands
+        ControllerBusyMinutes     = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetControllerBusy
+        PowerCycles               = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetPowerCycles
+        PowerOnHours              = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetPowerOnHours
+        UnsafeShutdowns           = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetUnsafeShutdowns
+        MediaErrors               = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetMediaErrors
+        ErrorLogEntries           = ConvertFrom-DiagUInt128 -Bytes $Bytes -Offset $script:DiagNvmeOffsetErrorLogEntries
+    }
+}
+
 function Get-NvmeSmart {
     <#
       Per-field NVMe health, each field independently sourced (RF-09):
@@ -195,7 +270,9 @@ function Get-NvmeSmart {
     )
 
     $log = Get-NvmeHealthLog -DiskNumber $DiskNumber
-    $hasLog = ($null -ne $log -and $log.Length -ge $script:DiagNvmeMinimumLogLength)
+    $parsed = $null
+    if ($null -ne $log) { $parsed = ConvertFrom-NvmeHealthLog -Bytes $log }
+    $hasLog = ($null -ne $parsed)
 
     $reliability = $null
     if ($null -ne $PhysicalDisk) {
@@ -215,14 +292,13 @@ function Get-NvmeSmart {
     $sources = New-Object System.Collections.ArrayList
 
     if ($hasLog) {
-        $criticalWarning = [int]$log[$script:DiagNvmeOffsetCriticalWarning]
-        $availableSpare = [int]$log[$script:DiagNvmeOffsetAvailableSpare]
-        $percentageUsed = [int]$log[$script:DiagNvmeOffsetPercentageUsed]
-        $kelvin = ([int]$log[$script:DiagNvmeOffsetTemperature]) + (([int]$log[$script:DiagNvmeOffsetTemperature + 1]) * 256)
-        if ($kelvin -gt 0) { $temperature = $kelvin - $script:DiagNvmeKelvinOffset }
-        $powerOnHours = ConvertFrom-DiagUInt128 -Bytes $log -Offset $script:DiagNvmeOffsetPowerOnHours
-        $unsafeShutdowns = ConvertFrom-DiagUInt128 -Bytes $log -Offset $script:DiagNvmeOffsetUnsafeShutdowns
-        $mediaErrors = ConvertFrom-DiagUInt128 -Bytes $log -Offset $script:DiagNvmeOffsetMediaErrors
+        $criticalWarning = $parsed.CriticalWarning
+        $availableSpare = $parsed.AvailableSparePct
+        $percentageUsed = $parsed.PercentageUsed
+        $temperature = $parsed.TemperatureC
+        $powerOnHours = $parsed.PowerOnHours
+        $unsafeShutdowns = $parsed.UnsafeShutdowns
+        $mediaErrors = $parsed.MediaErrors
         [void]$sources.Add('health-log')
     }
 
