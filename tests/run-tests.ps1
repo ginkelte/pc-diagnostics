@@ -566,6 +566,48 @@ function Test-T12QuickCeiling {
     }
 }
 
+function Test-T12bQuickNeverRunsDxDiag {
+    <#
+      RF-04: Quick mode writes only state.json, so it must not run dxdiag at all
+      (90 s and a stray dxdiag-<host>-<stamp>.txt in OutputDir). The guard is on
+      $Mode, not only on -SkipDxDiag: both modes run the real collection
+      function, Start-Process is the stub that records a launch, and the progress
+      sink records which steps actually existed.
+    #>
+    Reset-TestEnvironment
+    Set-PcDiagFixture -Name 'whea-mixed-system-log' | Out-Null
+
+    $script:PcDiagTestStepLines = New-Object System.Collections.ArrayList
+    Set-DiagProgressSink -Sink { param($progressLine) [void]$script:PcDiagTestStepLines.Add([string]$progressLine) }
+
+    $quickDir = New-TestTempDir
+    $quick = New-DiagSnapshot -Days 30 -TopFolders 3 -MaxEventsPerCategory 20 -Mode Quick `
+        -OutputDir $quickDir -StatePath (Join-Path -Path $quickDir -ChildPath 'state.json')
+    $quickLines = @($script:PcDiagTestStepLines.ToArray())
+
+    Assert-Count @(Get-PcDiagCalls -Cmdlet 'Start-Process') 0 'Quick mode never launches a process (dxdiag)'
+    Assert-Count @(Get-ChildItem -LiteralPath $quickDir -Filter 'dxdiag-*' -File -Recurse -ErrorAction SilentlyContinue) 0 'Quick mode writes no dxdiag artifact'
+    Assert-Count @($quickLines | Where-Object { $_ -match 'dxdiag' }) 0 'Quick mode has no dxdiag step at all'
+    Assert-NotNull $quick.dxdiag 'the snapshot still carries a dxdiag block'
+    Assert-True $quick.dxdiag.Skipped 'the Quick-mode dxdiag block is marked skipped, not failed'
+    Assert-Equal 'skipped (Quick mode)' $quick.dxdiag.State 'the skip names its cause instead of blaming a collector failure'
+
+    # Control: Full mode does have the step and does reach the collector. Without
+    # this the assertions above would also pass on a build where dxdiag was
+    # removed outright.
+    Reset-PcDiagStubs
+    Set-PcDiagFixture -Name 'whea-mixed-system-log' | Out-Null
+    $null = $script:PcDiagTestStepLines.Clear()
+    $fullDir = New-TestTempDir
+    $full = New-DiagSnapshot -Days 30 -TopFolders 3 -MaxEventsPerCategory 20 -Mode Full `
+        -OutputDir $fullDir -StatePath (Join-Path -Path $fullDir -ChildPath 'state.json') -FolderBudgetSeconds 2
+    $fullLines = @($script:PcDiagTestStepLines.ToArray())
+
+    Assert-Count @($fullLines | Where-Object { $_ -match 'Running dxdiag' }) 1 'Full mode runs the dxdiag step'
+    Assert-Match $full.dxdiag.State '^unavailable \(' 'Full mode reaches the collector (which degrades on a host without dxdiag.exe)'
+    Assert-NotEqual 'skipped (Quick mode)' $full.dxdiag.State 'Full mode is not reported as a Quick-mode skip'
+}
+
 function Test-T13BaselineOutOfWindow {
     <#
       EC-13 / RF-29: a previous run older than the window is not a baseline. The
@@ -913,6 +955,7 @@ $script:TestCases = @(
     @{ Name = 'T10-unavailable-not-zero';      Run = { Test-T10UnavailableNotZero } },
     @{ Name = 'T11-listing-truncation';        Run = { Test-T11ListingTruncation } },
     @{ Name = 'T12-quick-line-ceiling';        Run = { Test-T12QuickCeiling } },
+    @{ Name = 'T12b-quick-never-runs-dxdiag';  Run = { Test-T12bQuickNeverRunsDxDiag } },
     @{ Name = 'T13-baseline-out-of-window';    Run = { Test-T13BaselineOutOfWindow } },
     @{ Name = 'T14-whea-severity-labels';      Run = { Test-T14WheaSeverityLabels } },
     @{ Name = 'T15-locale-independent';        Run = { Test-T15LocaleIndependent } },

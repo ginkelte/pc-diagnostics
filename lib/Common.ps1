@@ -681,7 +681,9 @@ function New-DiagSnapshot {
     }
 
     $total = 12
-    if ($SkipDxDiag) { $total = 11 }
+    # RF-04: Quick mode never runs dxdiag, so the step does not exist and the
+    # progress denominator drops with it (as it already does for -SkipDxDiag).
+    if ($SkipDxDiag -or $Mode -ne 'Full') { $total = 11 }
 
     # Baseline resolution (RF-29, EC-13).
     $baselineUsable = $false
@@ -889,8 +891,10 @@ function New-DiagSnapshot {
         $update = [pscustomobject]@{ Available = $false; Reason = 'not collected'; LatestKbs = @(); Pending = $null; PendingState = 'unavailable (not collected)'; SearchDate = $null }
     }
 
-    # 12 - dxdiag (RF-12). Dropped from the step count when -SkipDxDiag is passed.
-    if (-not $SkipDxDiag) {
+    # 12 - dxdiag (RF-12). Full mode only: RF-04 forbids Quick mode from running
+    # dxdiag at all (it would spend up to 90 s and write a .txt into OutputDir).
+    # The step is dropped from the count when -SkipDxDiag is passed as well.
+    if (-not $SkipDxDiag -and $Mode -eq 'Full') {
         $s12 = Invoke-DiagStep -Index 12 -Total $total -Label 'Running dxdiag (may take up to 90 s)' -Script {
             if ([string]::IsNullOrWhiteSpace($OutputDir)) {
                 [pscustomobject]@{ Available = $false; Skipped = $true; State = 'unavailable (no output directory)'; Reason = 'no output directory'; KeyLines = @(); File = $null }
@@ -903,6 +907,8 @@ function New-DiagSnapshot {
     if ($null -eq $dxdiag) {
         if ($SkipDxDiag) {
             $dxdiag = [pscustomobject]@{ Available = $false; Skipped = $true; State = 'skipped (-SkipDxDiag)'; Reason = 'skipped'; KeyLines = @(); File = $null }
+        } elseif ($Mode -ne 'Full') {
+            $dxdiag = [pscustomobject]@{ Available = $false; Skipped = $true; State = 'skipped (Quick mode)'; Reason = 'skipped in Quick mode'; KeyLines = @(); File = $null }
         } else {
             $dxdiag = [pscustomobject]@{ Available = $false; Skipped = $false; State = 'unavailable (collector failed)'; Reason = 'collector failed'; KeyLines = @(); File = $null }
         }

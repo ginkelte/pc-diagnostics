@@ -307,7 +307,11 @@ function Get-DiagReportSection01 {
             }
         }
     } elseif ($dxdiag.Skipped -eq $true) {
-        Add-DiagReportText -Buffer $b -Text '    dxdiag: skipped (-SkipDxDiag)'
+        # The skip reason travels in State so a Quick-mode skip is not reported
+        # as a -SkipDxDiag skip: they are different decisions.
+        $skipText = [string]$dxdiag.State
+        if ([string]::IsNullOrWhiteSpace($skipText)) { $skipText = 'skipped (-SkipDxDiag)' }
+        Add-DiagReportText -Buffer $b -Text ('    dxdiag: ' + $skipText)
     } else {
         Add-DiagReportText -Buffer $b -Text ('    dxdiag: ' + (Format-DiagReportState -Token $dxdiag.State -Reason 'not run'))
     }

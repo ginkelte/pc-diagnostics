@@ -4,7 +4,7 @@ A read-only Windows diagnostic toolkit that produces a report you can trust.
 
 One command collects hardware, storage health, event-log evidence and
 configuration state, and writes a plain-text report you can send to someone
-else for a second opinion. A second mode prints a 17-line summary and tells you
+else for a second opinion. A second mode prints an 18-line summary and tells you
 whether anything came back since the last run.
 
 ---
@@ -71,7 +71,7 @@ Or from a terminal:
 ```powershell
 .\Invoke-PcDiagnostics.ps1                      # full report, last 30 days
 .\Invoke-PcDiagnostics.ps1 -Days 7              # narrower window
-.\Invoke-PcDiagnostics.ps1 -Mode Quick          # 17-line summary
+.\Invoke-PcDiagnostics.ps1 -Mode Quick          # 18-line summary, 24 max
 .\Invoke-PcDiagnostics.ps1 -SkipDxDiag          # 11 steps instead of 12
 ```
 
@@ -90,7 +90,7 @@ reports/
 
 | Section | Contents |
 |---|---|
-| System | Host, OS build, install date, boot time, uptime, elevation state |
+| System | Host, OS build, install date, uptime, elevation state |
 | CPU | Name, cores, threads, clock, load |
 | Memory | Per module: manufacturer, part number, declared vs configured speed, configured voltage, slot, total slots |
 | GPU | Every display adapter: name, driver version, driver date, VRAM |
@@ -105,7 +105,7 @@ reports/
 | Windows Update | Installed KBs and whether an update is pending |
 | Drivers | The oldest signed drivers by driver date |
 | Misc | TRIM status, RGB and lighting services, startup entries |
-| Problems | Every collector that could not deliver, with its reason |
+| Failures | Not a section of its own: a collector that cannot deliver renders `unavailable (<reason>)` inline, in the section that needed it |
 
 ---
 
@@ -115,8 +115,8 @@ Each event counter renders one line plus an audit line:
 
 ```
 whea_17  Microsoft-Windows-WHEA-Logger 17  total=4  since_last_run=0
-  label: WHEA correctable errors (PCIe AER)
-  query: LogName=System ProviderName=Microsoft-Windows-WHEA-Logger Id=17 since=2026-10-14
+  label: WHEA 17 correctable error, PCIe AER (Microsoft-Windows-WHEA-Logger)
+  query: LogName=System ProviderName=Microsoft-Windows-WHEA-Logger Id=17 since=2026-10-14T00:00:00
 ```
 
 The `query:` line is the point. It prints exactly what was asked of the event
@@ -138,18 +138,32 @@ run.
 
 ```
 PC DIAGNOSTICS - QUICK
-Host workstation | Win 11 Pro 26200 | uptime 3.2 d | window 30 d
-baseline: 2026-11-10 18:22 (3.0 d ago)
+Host workstation | Win 11 Pro 26200 | uptime 3.2 h | window 30 d
+baseline: 2026-11-10 18:22 (71.5 h ago)
 
-stornvme 129 (device reset)                 6      0
-disk 51 (paging error)                     35      0
-WHEA 17 (PCIe AER corrected)               58      0
-WER unique dumps                           12      0
+stornvme 129 (device reset)                6             +0
+disk 51 (paging error)                     35            +0
+WHEA 17 (PCIe AER corrected)               58            +0
+WHEA 18 fatal, 19/47 corrected             0             +0
+Kernel-Power 41 (bugcheck)                 12            +0
+EventLog 6008 (dirty shutdown)             5             +0
+App Error 1000                             72            +0
+App Hang 1002                              unavailable   -
+WER unique dumps                           12            +0
+WER re-reports                             172           +0
+
+C: 21.2 % free (197.1 GB)
+state: C:\diag\reports\state.json
 ```
 
-The third column is the count inside the window; the fourth is what arrived
-since the baseline. This is the mode to run after a change: it answers "did the
-errors come back" in three seconds without reading a report.
+The second column is the count inside the window; the third is what arrived
+since the baseline - `+0` means nothing new, `-` means there is no usable
+baseline for that counter, and `unavailable` means the query itself failed.
+This is the mode to run after a change: it answers "did the errors come back" in
+three seconds without reading a report.
+
+A volume below 10% free is flagged with ` !`. NVMe disks add one line each,
+and both blocks are capped at four lines so the ceiling always holds.
 
 `state.json` is the baseline. It records every counter, the WER signatures, the
 volumes and the firmware-relevant fields. It is read on the next run and
@@ -199,8 +213,9 @@ how it is developed.
 
 Fixtures cover both historical bugs directly: a System log containing
 `WindowsUpdateClient` ID 19 and TPM ID 18 events that must **not** be counted as
-machine checks, and 12 distinct crash dumps re-reported 173 times that must
-count as 12 unique dumps and leave the remaining events in `re-reports`.
+machine checks, and a crash-dump fixture of 184 WER events - one dump repeated
+173 times alongside eleven distinct dumps - which must count as 12 unique dumps
+with 172 re-reports.
 
 ---
 
