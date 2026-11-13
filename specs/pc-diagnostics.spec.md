@@ -468,8 +468,11 @@ Rules:
   provider and ID on the same line. A bare `19: 317` is non-compliant. In
   `state.json` the catalog key (`stornvme_129`) is the label and the catalog
   table is the provider mapping, so the file stays compact and unambiguous.
-- The term `machine check` MUST NOT be used for WHEA corrected-error counts. The
-  label is `WHEA correctable errors (Microsoft-Windows-WHEA-Logger)`.
+- The label MUST state the severity per ID, because the four WHEA IDs are not
+  interchangeable: 17 is a correctable PCIe AER error, **18 is a FATAL hardware
+  error**, 19 is a corrected machine check and 47 is a corrected machine check
+  reported at memory level. A fatal error labelled `corrected` is a defect of
+  the same severity as a false zero. Each label also carries the provider name.
 - Each catalog row in the report MUST print the query it ran, in the form
   `query: LogName=System ProviderName=stornvme Id=129 since=2026-10-14T00:00:00`,
   so a reader can audit the filter without reading source.
@@ -675,7 +678,7 @@ paths other than the state path:
 | `stornvme 129 (device reset)` | `stornvme_129` |
 | `disk 51 (paging error)` | `disk_51` |
 | `WHEA 17 (PCIe AER corrected)` | `whea_17` |
-| `WHEA 18/19/47 (corrected)` | sum of the three |
+| `WHEA 18 fatal, 19/47 corrected` | sum of the three; the label states both severities |
 | `Kernel-Power 41 (bugcheck)` | `kernel_power_41` |
 | `EventLog 6008 (dirty shutdown)` | `eventlog_6008` |
 | `App Error 1000` | `app_error_1000` |
@@ -992,7 +995,7 @@ baseline: 2026-11-12 21:10 (21.4 h ago)
 stornvme 129 (device reset)          6   +2 !
 disk 51 (paging error)              35   +0
 WHEA 17 (PCIe AER corrected)        58   +3 !
-WHEA 18/19/47 (corrected)            0   +0
+WHEA 18 fatal, 19/47 corrected       0   +0
 Kernel-Power 41 (bugcheck)           3   +1 !
 EventLog 6008 (dirty shutdown)       4   +1 !
 App Error 1000                       5   +0

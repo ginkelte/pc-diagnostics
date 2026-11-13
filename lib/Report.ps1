@@ -1248,7 +1248,10 @@ function Get-DiagReportQuickRows {
         @{ Label = 'stornvme 129 (device reset)'; Keys = @('stornvme_129'); Source = 'counter' },
         @{ Label = 'disk 51 (paging error)'; Keys = @('disk_51'); Source = 'counter' },
         @{ Label = 'WHEA 17 (PCIe AER corrected)'; Keys = @('whea_17'); Source = 'counter' },
-        @{ Label = 'WHEA 18/19/47 (corrected)'; Keys = @('whea_18', 'whea_19', 'whea_47'); Source = 'counter' },
+        # Id 18 is FATAL and 19/47 are corrected machine checks; the label says so
+        # because the total below is a sum of both severities and a reader must
+        # not read "+0" on a fatal error as "nothing corrected".
+        @{ Label = 'WHEA 18 fatal, 19/47 corrected'; Keys = @('whea_18', 'whea_19', 'whea_47'); Source = 'counter' },
         @{ Label = 'Kernel-Power 41 (bugcheck)'; Keys = @('kernel_power_41'); Source = 'counter' },
         @{ Label = 'EventLog 6008 (dirty shutdown)'; Keys = @('eventlog_6008'); Source = 'counter' },
         @{ Label = 'App Error 1000'; Keys = @('app_error_1000'); Source = 'counter' },

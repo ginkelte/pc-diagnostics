@@ -20,14 +20,18 @@
 #   Provider - exact provider name, never a pattern
 #   Ids      - one or more event Ids, always evaluated with the provider
 #   Label    - human label used by the report; carries the provider name so a
-#              bare "19: 317" cannot be printed
+#              bare "19: 317" cannot be printed, and states the WHEA severity
+#              per Id. Id 18 is a FATAL hardware error; 17, 19 and 47 are the
+#              corrected/correctable ones. An event that is fatal must never be
+#              labelled corrected: that is the kind of misleading datum this
+#              toolkit exists to avoid.
 # ---------------------------------------------------------------------------
 if ($null -eq $script:DiagEventCatalog) {
     $script:DiagEventCatalog = @(
-        @{ Key = 'whea_17'; Log = 'System'; Provider = 'Microsoft-Windows-WHEA-Logger'; Ids = @(17); Label = 'WHEA correctable errors (Microsoft-Windows-WHEA-Logger)' },
-        @{ Key = 'whea_18'; Log = 'System'; Provider = 'Microsoft-Windows-WHEA-Logger'; Ids = @(18); Label = 'WHEA correctable errors (Microsoft-Windows-WHEA-Logger)' },
-        @{ Key = 'whea_19'; Log = 'System'; Provider = 'Microsoft-Windows-WHEA-Logger'; Ids = @(19); Label = 'WHEA correctable errors (Microsoft-Windows-WHEA-Logger)' },
-        @{ Key = 'whea_47'; Log = 'System'; Provider = 'Microsoft-Windows-WHEA-Logger'; Ids = @(47); Label = 'WHEA correctable errors (Microsoft-Windows-WHEA-Logger)' },
+        @{ Key = 'whea_17'; Log = 'System'; Provider = 'Microsoft-Windows-WHEA-Logger'; Ids = @(17); Label = 'WHEA 17 correctable error, PCIe AER (Microsoft-Windows-WHEA-Logger)' },
+        @{ Key = 'whea_18'; Log = 'System'; Provider = 'Microsoft-Windows-WHEA-Logger'; Ids = @(18); Label = 'WHEA 18 FATAL hardware error (Microsoft-Windows-WHEA-Logger)' },
+        @{ Key = 'whea_19'; Log = 'System'; Provider = 'Microsoft-Windows-WHEA-Logger'; Ids = @(19); Label = 'WHEA 19 corrected machine check (Microsoft-Windows-WHEA-Logger)' },
+        @{ Key = 'whea_47'; Log = 'System'; Provider = 'Microsoft-Windows-WHEA-Logger'; Ids = @(47); Label = 'WHEA 47 corrected machine check, memory (Microsoft-Windows-WHEA-Logger)' },
         @{ Key = 'stornvme_129'; Log = 'System'; Provider = 'stornvme'; Ids = @(129); Label = 'NVMe controller reset (stornvme)' },
         @{ Key = 'disk_7'; Log = 'System'; Provider = 'disk'; Ids = @(7); Label = 'Bad block (disk)' },
         @{ Key = 'disk_11'; Log = 'System'; Provider = 'disk'; Ids = @(11); Label = 'Controller error (disk)' },

@@ -218,7 +218,7 @@ Feature: PC diagnostics toolkit
     And counter "whea_18" is 0
     And counter "whea_19" is 0
     And no counter reports 3 for Id 19
-    And the report does not contain the label "machine check" for those counts
+    And no count is labelled without its provider name
 
   @RF-13
   Scenario: Every counter is labelled with its provider and prints its query
@@ -226,7 +226,7 @@ Feature: PC diagnostics toolkit
     When section "07 EVENT SUMMARY" is rendered
     Then each line reads "<counter_key> <provider> <id> total=<n> since_last_run=<value>"
     And each line is followed by a "query: LogName=... ProviderName=... Id=... since=..." line
-    And the label for the WHEA rows is "WHEA correctable errors (Microsoft-Windows-WHEA-Logger)"
+    And the WHEA labels state the severity per Id: 17 correctable PCIe AER, 18 FATAL, 19 and 47 corrected machine checks
 
   # ── RF-14: Query guard ──
 
@@ -456,7 +456,7 @@ Feature: PC diagnostics toolkit
   Scenario: Quick mode prints the fixed counter table
     Given a collected snapshot
     When the quick renderer runs
-    Then the rows appear in the order stornvme 129, disk 51, WHEA 17, WHEA 18/19/47, Kernel-Power 41, EventLog 6008, App Error 1000, App Hang 1002, WER unique dumps, WER re-reports
+    Then the rows appear in the order stornvme 129, disk 51, WHEA 17, WHEA 18 fatal / 19+47 corrected, Kernel-Power 41, EventLog 6008, App Error 1000, App Hang 1002, WER unique dumps, WER re-reports
     And the table has the columns label, total and delta
     And the output ends with the volume line, the NVMe line and the state path
     And the output is at most 24 lines
