@@ -21,6 +21,11 @@ $global:PcDiagFixture = $null
 $global:PcDiagFixtureName = ''
 $global:PcDiagStubMode = 'normal'
 $global:PcDiagStubErrorText = 'stub query failure'
+# dxdiag /x payload: when set, the Start-Process stub writes it to the path the
+# collector asked for, exactly as dxdiag would. Empty means "dxdiag wrote
+# nothing", which is the EC-07 no-file case.
+$global:PcDiagDxDiagXml = ''
+$global:PcDiagDxDiagXmlEncoding = 'utf8'
 
 $script:StubFixtureDir = Join-Path -Path $PSScriptRoot -ChildPath 'fixtures'
 
@@ -38,6 +43,8 @@ function Reset-PcDiagStubs {
     $global:PcDiagFixtureName = ''
     $global:PcDiagStubMode = 'normal'
     $global:PcDiagStubErrorText = 'stub query failure'
+    $global:PcDiagDxDiagXml = ''
+    $global:PcDiagDxDiagXmlEncoding = 'utf8'
 }
 
 function Get-PcDiagFixtureDirectory { return [string]$script:StubFixtureDir }
@@ -506,23 +513,105 @@ function fsutil {
     return (fsutil.exe @Arguments)
 }
 
+function Set-PcDiagDxDiagXml {
+    <#
+      The payload the dxdiag stub writes. Either a fixture name from
+      tests/fixtures (an .xml file) or a literal document, plus the encoding it
+      is written in: dxdiag writes UTF-16 on some builds and accented values
+      must survive either way.
+    #>
+    param(
+        [string]$Name = '',
+        [string]$Xml = '',
+        [ValidateSet('utf8', 'utf16')][string]$Encoding = 'utf8'
+    )
+
+    if (-not [string]::IsNullOrWhiteSpace($Name)) {
+        $path = Join-Path -Path $script:StubFixtureDir -ChildPath ($Name + '.xml')
+        if (-not (Test-Path -LiteralPath $path)) {
+            throw (New-Object System.Exception('STUB_DXDIAG_FIXTURE_MISSING: ' + $path))
+        }
+        $Xml = [System.IO.File]::ReadAllText($path, [System.Text.Encoding]::UTF8)
+    }
+    # dxdiag writes its own declaration; when the payload is re-encoded here the
+    # declaration has to follow, or a parser reads UTF-16 bytes as UTF-8.
+    $Xml = ([string]$Xml).TrimStart([char]0xFEFF)
+    if ($Encoding -eq 'utf16') {
+        $Xml = $Xml -replace 'encoding="[^"]*"', 'encoding="utf-16"'
+        if ($Xml -notmatch 'encoding=') {
+            $Xml = '<?xml version="1.0" encoding="utf-16"?>' + $Xml
+        }
+    }
+    $global:PcDiagDxDiagXml = [string]$Xml
+    $global:PcDiagDxDiagXmlEncoding = [string]$Encoding
+    return $global:PcDiagDxDiagXml
+}
+
+function dxdiag.exe {
+    <#
+      Present only so Get-Command finds a "dxdiag.exe" on a Linux test host; the
+      collector launches it through Start-Process, which is stubbed below.
+    #>
+    param([Parameter(ValueFromRemainingArguments = $true)]$Arguments)
+
+    Add-PcDiagStubCall -Cmdlet 'dxdiag.exe' -Arguments ([pscustomobject]@{ Arguments = @($Arguments) })
+    if ([string]$global:PcDiagStubMode -eq 'throw') { throw (New-Object System.Exception([string]$global:PcDiagStubErrorText)) }
+}
+
 function Start-Process {
     <#
-      dxdiag must never actually launch: the stub records the call and pretends
-      the process ran out of time, which is the EC-07 "timeout" branch.
+      dxdiag must never actually launch. The stub records the call and, when a
+      payload is configured, writes it to the path in the argument list so the
+      collector reads a real file. With no payload it writes nothing, which is
+      the EC-07 "dxdiag produced no file" branch.
     #>
     [CmdletBinding()]
     param(
         [string]$FilePath,
-        [string]$ArgumentList,
+        [string[]]$ArgumentList,
         [switch]$Wait,
+        [switch]$PassThru,
+        [string]$WindowStyle,
         [switch]$NoNewWindow,
         [int]$TimeoutSeconds
     )
 
-    Add-PcDiagStubCall -Cmdlet 'Start-Process' -Arguments ([pscustomobject]@{ FilePath = $FilePath; ArgumentList = $ArgumentList })
+    $arguments = @($ArgumentList)
+    Add-PcDiagStubCall -Cmdlet 'Start-Process' -Arguments ([pscustomobject]@{ FilePath = $FilePath; ArgumentList = ($arguments -join ' ') })
     if ([string]$global:PcDiagStubMode -eq 'throw') { throw (New-Object System.Exception([string]$global:PcDiagStubErrorText)) }
-    return [pscustomobject]@{ Id = 4242; HasExited = $false; ExitCode = $null }
+
+    $xml = [string]$global:PcDiagDxDiagXml
+    if (-not [string]::IsNullOrEmpty($xml) -and $arguments.Count -ge 1) {
+        $target = ([string]$arguments[$arguments.Count - 1]).Trim('"')
+        if (-not [string]::IsNullOrWhiteSpace($target)) {
+            $parent = Split-Path -Parent -Path $target
+            if (-not [string]::IsNullOrWhiteSpace($parent) -and -not (Test-Path -LiteralPath $parent)) {
+                [void](New-Item -ItemType Directory -Path $parent -Force)
+            }
+            if ([string]$global:PcDiagDxDiagXmlEncoding -eq 'utf16') {
+                [System.IO.File]::WriteAllText($target, $xml, [System.Text.Encoding]::Unicode)
+            } else {
+                [System.IO.File]::WriteAllText($target, $xml, (New-Object System.Text.UTF8Encoding($false)))
+            }
+        }
+    }
+
+    $process = [pscustomobject]@{ Id = 4242; HasExited = $true; ExitCode = 0 }
+    $process | Add-Member -MemberType ScriptMethod -Name WaitForExit -Value { param([int]$milliseconds) return $true }
+    $process | Add-Member -MemberType ScriptMethod -Name Kill -Value { }
+    return $process
+}
+
+function Start-Sleep {
+    <#
+      The collector waits for dxdiag's file to stop growing by polling once per
+      second for up to 30 s. Sleeping for real would spend that time in the
+      suite, so the stub returns immediately: the loop still runs, it just does
+      not cost wall-clock seconds.
+    #>
+    param([int]$Seconds = 0, [int]$Milliseconds = 0)
+
+    Add-PcDiagStubCall -Cmdlet 'Start-Sleep' -Arguments ([pscustomobject]@{ Seconds = $Seconds; Milliseconds = $Milliseconds })
 }
 
 function Get-Process {

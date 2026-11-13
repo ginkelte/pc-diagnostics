@@ -2,7 +2,8 @@
 # committed. Reports and state land in -OutputDir, which defaults to .\reports.
 reports/
 pc-diagnostics-*.txt
-dxdiag-*.txt
+# root-anchored: the dxdiag fixtures under tests/fixtures must stay tracked
+/dxdiag-*.xml
 state.json
 state.json.tmp
 state.json.corrupt-*

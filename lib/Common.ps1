@@ -892,12 +892,12 @@ function New-DiagSnapshot {
     }
 
     # 12 - dxdiag (RF-12). Full mode only: RF-04 forbids Quick mode from running
-    # dxdiag at all (it would spend up to 90 s and write a .txt into OutputDir).
+    # dxdiag at all (it would spend up to 90 s and write a .xml into OutputDir).
     # The step is dropped from the count when -SkipDxDiag is passed as well.
     if (-not $SkipDxDiag -and $Mode -eq 'Full') {
         $s12 = Invoke-DiagStep -Index 12 -Total $total -Label 'Running dxdiag (may take up to 90 s)' -Script {
             if ([string]::IsNullOrWhiteSpace($OutputDir)) {
-                [pscustomobject]@{ Available = $false; Skipped = $true; State = 'unavailable (no output directory)'; Reason = 'no output directory'; KeyLines = @(); File = $null }
+                New-DiagDxDiagResult -Skipped $true -State 'unavailable (no output directory)' -Reason 'no output directory'
             } else {
                 Get-DiagDxDiag -OutputDir $OutputDir -HostName $hostName -Stamp $stamp
             }
@@ -906,11 +906,11 @@ function New-DiagSnapshot {
     }
     if ($null -eq $dxdiag) {
         if ($SkipDxDiag) {
-            $dxdiag = [pscustomobject]@{ Available = $false; Skipped = $true; State = 'skipped (-SkipDxDiag)'; Reason = 'skipped'; KeyLines = @(); File = $null }
+            $dxdiag = New-DiagDxDiagResult -Skipped $true -State 'skipped (-SkipDxDiag)' -Reason 'skipped'
         } elseif ($Mode -ne 'Full') {
-            $dxdiag = [pscustomobject]@{ Available = $false; Skipped = $true; State = 'skipped (Quick mode)'; Reason = 'skipped in Quick mode'; KeyLines = @(); File = $null }
+            $dxdiag = New-DiagDxDiagResult -Skipped $true -State 'skipped (Quick mode)' -Reason 'skipped in Quick mode'
         } else {
-            $dxdiag = [pscustomobject]@{ Available = $false; Skipped = $false; State = 'unavailable (collector failed)'; Reason = 'collector failed'; KeyLines = @(); File = $null }
+            $dxdiag = New-DiagDxDiagResult -State 'unavailable (collector failed)' -Reason 'collector failed'
         }
     }
 

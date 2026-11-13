@@ -569,29 +569,143 @@ function Get-DiagMisc {
 # dxdiag (RF-12, EC-07, OQ-02)
 # ---------------------------------------------------------------------------
 
-if ($null -eq $script:DiagDxDiagLabels) {
-    $script:DiagDxDiagLabels = @(
-        'Operating System:',
-        'System Model:',
-        'BIOS:',
-        'Processor:',
-        'Memory:',
-        'Card name:',
-        'Driver Version:',
-        'Driver Date:',
-        'Display Memory:'
+function New-DiagDxDiagResult {
+    <#
+      One shape for every dxdiag outcome, so a renderer or a test never has to
+      branch on which failure produced the block. A field that was not read is
+      filled with "unavailable (<reason>)": never an empty string, never a
+      guess, never a default that looks like real data (EC-07).
+    #>
+    param(
+        [bool]$Available = $false,
+        [bool]$Skipped = $false,
+        [string]$State = 'unavailable (not run)',
+        [string]$Reason = $null,
+        $OperatingSystem = $null,
+        $Processor = $null,
+        $Memory = $null,
+        [object[]]$DisplayDevices = @(),
+        [string[]]$KeyLines = @(),
+        [string]$File = $null
     )
+
+    $fallback = [string]$Reason
+    if ([string]::IsNullOrWhiteSpace($fallback)) { $fallback = 'not run' }
+    $missing = 'unavailable (' + $fallback + ')'
+    if ([string]::IsNullOrWhiteSpace([string]$OperatingSystem)) { $OperatingSystem = $missing }
+    if ([string]::IsNullOrWhiteSpace([string]$Processor)) { $Processor = $missing }
+    if ([string]::IsNullOrWhiteSpace([string]$Memory)) { $Memory = $missing }
+
+    return [pscustomobject][ordered]@{
+        Available       = $Available
+        Skipped         = $Skipped
+        State           = $State
+        Reason          = $Reason
+        OperatingSystem = $OperatingSystem
+        Processor       = $Processor
+        Memory          = $Memory
+        DisplayDevices  = @($DisplayDevices)
+        KeyLines        = @($KeyLines)
+        File            = $File
+    }
+}
+
+function Get-DiagXmlValue {
+    <#
+      Text of the element with that local name under -Node, or $null when the
+      element is absent or blank. Selection is by LocalName only: a namespace
+      prefix, the element order and the surrounding tree do not matter, and no
+      label text is involved, which is what makes the read independent of the
+      language dxdiag rendered the report in (EC-05).
+    #>
+    param([System.Xml.XmlNode]$Node, [string]$LocalName)
+
+    if ($null -eq $Node) { return $null }
+    if ([string]::IsNullOrWhiteSpace($LocalName)) { return $null }
+
+    $element = $null
+    try { $element = $Node.SelectSingleNode("./*[local-name()='" + $LocalName + "']") } catch { $element = $null }
+    if ($null -eq $element) {
+        # Some builds nest the value one level deeper; still by local name.
+        try { $element = $Node.SelectSingleNode(".//*[local-name()='" + $LocalName + "']") } catch { $element = $null }
+    }
+    if ($null -eq $element) { return $null }
+
+    $text = [string]$element.InnerText
+    if ([string]::IsNullOrWhiteSpace($text)) { return $null }
+    return (ConvertTo-DiagSingleLine -Text $text -MaxLength 200)
+}
+
+function Get-DiagXmlValueOrUnavailable {
+    <#
+      A field value that is never blank: a missing element becomes
+      "unavailable (missing element <Name>)" so the report says what is missing
+      instead of showing nothing.
+    #>
+    param([System.Xml.XmlNode]$Node, [string]$LocalName)
+
+    $value = Get-DiagXmlValue -Node $Node -LocalName $LocalName
+    if ([string]::IsNullOrWhiteSpace([string]$value)) {
+        return ('unavailable (missing element ' + $LocalName + ')')
+    }
+    return $value
+}
+
+function Get-DiagDxDiagDisplayDevices {
+    <#
+      One flat object per adapter, so an integrated GPU plus a dedicated one
+      yields two entries. The <DisplayDevices> container is preferred; a
+      document that only carries <DisplayDevice> elsewhere still works.
+    #>
+    param([System.Xml.XmlNode]$Document)
+
+    $nodes = New-Object System.Collections.ArrayList
+    if ($null -ne $Document) {
+        $containers = @()
+        try { $containers = @($Document.SelectNodes("//*[local-name()='DisplayDevices']")) } catch { $containers = @() }
+        foreach ($container in $containers) {
+            if ($null -eq $container) { continue }
+            foreach ($node in @($container.SelectNodes("./*[local-name()='DisplayDevice']"))) {
+                if ($null -ne $node) { [void]$nodes.Add($node) }
+            }
+        }
+        if ($nodes.Count -eq 0) {
+            try {
+                foreach ($node in @($Document.SelectNodes("//*[local-name()='DisplayDevice']"))) {
+                    if ($null -ne $node) { [void]$nodes.Add($node) }
+                }
+            } catch { }
+        }
+    }
+
+    $devices = New-Object System.Collections.ArrayList
+    foreach ($node in $nodes.ToArray()) {
+        [void]$devices.Add([pscustomobject][ordered]@{
+            CardName        = (Get-DiagXmlValueOrUnavailable -Node $node -LocalName 'CardName')
+            ChipType        = (Get-DiagXmlValueOrUnavailable -Node $node -LocalName 'ChipType')
+            DedicatedMemory = (Get-DiagXmlValueOrUnavailable -Node $node -LocalName 'DedicatedMemory')
+            DriverVersion   = (Get-DiagXmlValueOrUnavailable -Node $node -LocalName 'DriverVersion')
+            DriverDate      = (Get-DiagXmlValueOrUnavailable -Node $node -LocalName 'DriverDate')
+        })
+    }
+    return @($devices.ToArray())
 }
 
 function Get-DiagDxDiag {
     <#
-      Runs dxdiag /t <OutputDir>\dxdiag-<host>-<stamp>.txt with a 90 s timeout,
-      waits for the file size to stabilise over two consecutive 1 s polls, then
-      extracts at most 40 allowlisted key lines. Never throws; a missing binary
-      or a timeout degrades the block and the run continues (RF-12, EC-07).
+      Runs "dxdiag /x <OutputDir>\dxdiag-<host>-<stamp>.xml" with a 90 s timeout
+      and reads the XML by element local name.
 
-      The raw file is either complete or absent, never half-written into the
-      report.
+      Why XML and not the text report: "dxdiag /t" writes the report in the
+      language of the system, so an allowlist of English labels ("Operating
+      System:", "Card name:") matched zero lines on an es-CL Windows and the
+      block degraded to "no key lines matched" after waiting up to 90 s. The /x
+      document uses element names (OperatingSystem, CardName, ...) that do not
+      change with the display language (EC-05).
+
+      Never throws: a missing binary, a timeout, an absent file, an unparsable
+      document or a missing element degrades the block to
+      "unavailable (<reason>)" and the run continues (RF-12, EC-07).
     #>
     param(
         [Parameter(Mandatory = $true)][string]$OutputDir,
@@ -603,37 +717,27 @@ function Get-DiagDxDiag {
     )
 
     if ($SkipDxDiag) {
-        return [pscustomobject]@{
-            Available = $false
-            Skipped   = $true
-            State     = 'skipped (-SkipDxDiag)'
-            Reason    = 'skipped'
-            KeyLines  = @()
-            File      = $null
-        }
+        return (New-DiagDxDiagResult -Skipped $true -State 'skipped (-SkipDxDiag)' -Reason 'skipped')
     }
 
-    $target = Join-Path -Path $OutputDir -ChildPath ('dxdiag-' + $HostName + '-' + $Stamp + '.txt')
+    $target = Join-Path -Path $OutputDir -ChildPath ('dxdiag-' + $HostName + '-' + $Stamp + '.xml')
 
     $command = $null
     try { $command = Get-Command -Name 'dxdiag.exe' -ErrorAction Stop } catch { $command = $null }
     if ($null -eq $command) {
         Add-DiagProblem -Collector 'dxdiag' -Reason 'missing'
-        return [pscustomobject]@{
-            Available = $false
-            Skipped   = $false
-            State     = 'unavailable (missing)'
-            Reason    = 'missing'
-            KeyLines  = @()
-            File      = $null
-        }
+        return (New-DiagDxDiagResult -State 'unavailable (missing)' -Reason 'missing')
     }
 
     $timedOut = $false
     try {
         $quoted = '"' + $target + '"'
-        $proc = Start-Process -FilePath 'dxdiag.exe' -ArgumentList @('/t', $quoted) -PassThru -WindowStyle Hidden
-        if ($null -eq $proc -or -not $proc.WaitForExit($TimeoutSeconds * 1000)) {
+        $proc = Start-Process -FilePath 'dxdiag.exe' -ArgumentList @('/x', $quoted) -PassThru -WindowStyle Hidden
+        $exited = $false
+        if ($null -ne $proc) {
+            try { $exited = [bool]$proc.WaitForExit($TimeoutSeconds * 1000) } catch { $exited = $false }
+        }
+        if (-not $exited) {
             $timedOut = $true
             if ($null -ne $proc) {
                 try { $proc.Kill() } catch { }
@@ -642,31 +746,20 @@ function Get-DiagDxDiag {
     } catch {
         $reason = Get-DiagErrorText -ErrorRecord $_
         Add-DiagProblem -Collector 'dxdiag' -Reason $reason
-        return [pscustomobject]@{
-            Available = $false
-            Skipped   = $false
-            State     = 'unavailable (' + $reason + ')'
-            Reason    = $reason
-            KeyLines  = @()
-            File      = $null
-        }
+        return (New-DiagDxDiagResult -State ('unavailable (' + $reason + ')') -Reason $reason)
     }
 
     if ($timedOut) {
         Add-DiagProblem -Collector 'dxdiag' -Reason 'timeout'
-        return [pscustomobject]@{
-            Available = $false
-            Skipped   = $false
-            State     = 'unavailable (timeout)'
-            Reason    = 'timeout'
-            KeyLines  = @()
-            File      = $null
-        }
+        return (New-DiagDxDiagResult -State 'unavailable (timeout)' -Reason 'timeout')
     }
 
     # Wait for the size to stop changing: dxdiag returns before it has finished
-    # flushing the file on some builds.
+    # flushing the file on some builds. The loop gives up after three polls with
+    # no file at all, so a build that writes nothing costs three seconds instead
+    # of thirty.
     $stable = 0
+    $missingPolls = 0
     $lastSize = -1
     $polls = 0
     while ($stable -lt 2 -and $polls -lt 30) {
@@ -685,40 +778,96 @@ function Get-DiagDxDiag {
         } else {
             $stable = 0
         }
+        if ($size -gt 0) { $missingPolls = 0 } else { $missingPolls = $missingPolls + 1 }
+        if ($missingPolls -ge 3) { break }
         $lastSize = $size
     }
 
-    $lines = @()
+    $exists = $false
+    try { $exists = (Test-Path -LiteralPath $target) } catch { $exists = $false }
+    if (-not $exists) {
+        Add-DiagProblem -Collector 'dxdiag' -Reason 'no xml file'
+        return (New-DiagDxDiagResult -State 'unavailable (no xml file)' -Reason 'no xml file')
+    }
+
+    # XmlDocument.Load reads the bytes: it honours the BOM and the encoding
+    # declaration, so an accented value survives regardless of the output
+    # encoding. Get-Content without -Encoding would decode as ANSI on Windows
+    # PowerShell 5.1 and mangle it, which is why the file is not read as text.
+    $document = $null
+    $parseReason = $null
     try {
-        if (Test-Path -LiteralPath $target) { $lines = @(Get-Content -LiteralPath $target -ErrorAction Stop) }
+        $document = New-Object System.Xml.XmlDocument
+        try { $document.XmlResolver = $null } catch { }
+        $document.Load($target)
     } catch {
-        $lines = @()
-    }
-
-    $keyLines = New-Object System.Collections.ArrayList
-    foreach ($line in $lines) {
-        if ($null -eq $line) { continue }
-        $text = [string]$line
-        foreach ($label in $script:DiagDxDiagLabels) {
-            if ($text.TrimStart().StartsWith($label, [System.StringComparison]::OrdinalIgnoreCase) -or
-                $text.TrimStart().StartsWith($label.TrimEnd(':'), [System.StringComparison]::OrdinalIgnoreCase)) {
-                [void]$keyLines.Add((ConvertTo-DiagSingleLine -Text $text -MaxLength 200))
-                break
-            }
+        $document = $null
+        $detail = ''
+        try {
+            if ($null -ne $_.Exception.InnerException) { $detail = [string]$_.Exception.InnerException.Message }
+        } catch {
+            $detail = ''
         }
-        if ($keyLines.Count -ge $MaxKeyLines) { break }
+        if ([string]::IsNullOrWhiteSpace($detail)) { $detail = Get-DiagErrorText -ErrorRecord $_ }
+        $parseReason = 'xml not parsable: ' + (ConvertTo-DiagSingleLine -Text $detail -MaxLength 160)
+    }
+    if ($null -eq $document) {
+        Add-DiagProblem -Collector 'dxdiag' -Reason 'xml not parsable'
+        return (New-DiagDxDiagResult -State ('unavailable (' + $parseReason + ')') -Reason $parseReason -File $target)
     }
 
-    if ($keyLines.Count -eq 0) {
-        Add-DiagProblem -Collector 'dxdiag' -Reason 'no key lines matched'
+    $os = Get-DiagXmlValue -Node $document -LocalName 'OperatingSystem'
+    if ([string]::IsNullOrWhiteSpace([string]$os)) { $os = 'unavailable (missing element OperatingSystem)' }
+    $processor = Get-DiagXmlValue -Node $document -LocalName 'Processor'
+    if ([string]::IsNullOrWhiteSpace([string]$processor)) { $processor = 'unavailable (missing element Processor)' }
+    $memory = Get-DiagXmlValue -Node $document -LocalName 'Memory'
+    if ([string]::IsNullOrWhiteSpace([string]$memory)) { $memory = 'unavailable (missing element Memory)' }
+
+    $devices = @(Get-DiagDxDiagDisplayDevices -Document $document)
+
+    # The rendered lines are derived from the fields above, so the report and
+    # the structured block can never disagree about what dxdiag said.
+    $keyLines = New-Object System.Collections.ArrayList
+    [void]$keyLines.Add('OperatingSystem: ' + [string]$os)
+    [void]$keyLines.Add('Processor: ' + [string]$processor)
+    [void]$keyLines.Add('Memory: ' + [string]$memory)
+    if ($devices.Count -eq 0) {
+        Add-DiagProblem -Collector 'dxdiag' -Reason 'no DisplayDevice element'
+        [void]$keyLines.Add('DisplayDevice: unavailable (no DisplayDevice element)')
+    } else {
+        $index = 0
+        foreach ($device in $devices) {
+            if ($null -eq $device) { continue }
+            $index = $index + 1
+            $prefix = 'DisplayDevice #' + [string]$index + ' '
+            [void]$keyLines.Add($prefix + 'CardName: ' + [string]$device.CardName)
+            [void]$keyLines.Add($prefix + 'DedicatedMemory: ' + [string]$device.DedicatedMemory)
+            [void]$keyLines.Add($prefix + 'DriverVersion: ' + [string]$device.DriverVersion)
+            [void]$keyLines.Add($prefix + 'DriverDate: ' + [string]$device.DriverDate)
+        }
     }
 
-    return [pscustomobject]@{
-        Available = ($keyLines.Count -gt 0)
-        Skipped   = $false
-        State     = $(if ($keyLines.Count -gt 0) { 'ok' } else { 'no key lines matched' })
-        Reason    = $(if ($keyLines.Count -gt 0) { $null } else { 'no key lines matched' })
-        KeyLines  = @($keyLines.ToArray())
-        File      = $target
+    $lines = @($keyLines.ToArray())
+    if ($MaxKeyLines -gt 0 -and $lines.Count -gt $MaxKeyLines) {
+        $lines = @($lines | Select-Object -First $MaxKeyLines)
     }
+
+    # If the document parsed but carries none of the expected element names the
+    # structure is not the one this collector knows: say so instead of reporting
+    # a block of three "missing element" lines as a success.
+    $anySystemField = $false
+    foreach ($value in @($os, $processor, $memory)) {
+        if ([string]$value -notmatch '^unavailable \(') { $anySystemField = $true; break }
+    }
+    if (-not $anySystemField -and $devices.Count -eq 0) {
+        $reason = 'no dxdiag elements matched'
+        Add-DiagProblem -Collector 'dxdiag' -Reason $reason
+        return (New-DiagDxDiagResult -State ('unavailable (' + $reason + ')') -Reason $reason `
+                -OperatingSystem $os -Processor $processor -Memory $memory `
+                -DisplayDevices @() -KeyLines $lines -File $target)
+    }
+
+    return (New-DiagDxDiagResult -Available $true -State 'ok' -Reason $null `
+            -OperatingSystem $os -Processor $processor -Memory $memory `
+            -DisplayDevices $devices -KeyLines $lines -File $target)
 }

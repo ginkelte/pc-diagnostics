@@ -770,7 +770,7 @@ function Test-T12QuickCeiling {
 function Test-T12bQuickNeverRunsDxDiag {
     <#
       RF-04: Quick mode writes only state.json, so it must not run dxdiag at all
-      (90 s and a stray dxdiag-<host>-<stamp>.txt in OutputDir). The guard is on
+      (90 s and a stray dxdiag-<host>-<stamp>.xml in OutputDir). The guard is on
       $Mode, not only on -SkipDxDiag: both modes run the real collection
       function, Start-Process is the stub that records a launch, and the progress
       sink records which steps actually existed.
@@ -807,6 +807,83 @@ function Test-T12bQuickNeverRunsDxDiag {
     Assert-Count @($fullLines | Where-Object { $_ -match 'Running dxdiag' }) 1 'Full mode runs the dxdiag step'
     Assert-Match $full.dxdiag.State '^unavailable \(' 'Full mode reaches the collector (which degrades on a host without dxdiag.exe)'
     Assert-NotEqual 'skipped (Quick mode)' $full.dxdiag.State 'Full mode is not reported as a Quick-mode skip'
+}
+
+function Test-T12cDxDiagXmlLocaleIndependent {
+    <#
+      RF-12 / EC-05 / EC-07: dxdiag is read from its /x XML by element local
+      name, never from the localised /t report. An es-CL Windows writes
+      "Nombre de la tarjeta:" and the old English label allowlist matched zero
+      lines after waiting up to 90 s. The fixtures carry accented and quoted
+      values (JoSé's PC, "Gaming OC", Edición española), a device without
+      DedicatedMemory and a truncated document.
+    #>
+    Reset-TestEnvironment
+
+    $dir = New-TestTempDir
+    Set-PcDiagDxDiagXml -Name 'dxdiag-es-cl' | Out-Null
+    $block = Get-DiagDxDiag -OutputDir $dir -HostName 'test-host' -Stamp '20260101-120000'
+
+    # (a) the invocation asks for XML, and the artifact carries the new extension.
+    $launch = Get-PcDiagLastCall -Cmdlet 'Start-Process'
+    Assert-NotNull $launch 'dxdiag was launched'
+    Assert-Match $launch.Arguments.ArgumentList '^/x ' 'dxdiag is asked for its XML, not for the localised /t report'
+    Assert-Match $launch.Arguments.ArgumentList 'dxdiag-test-host-20260101-120000\.xml"$' 'the artifact is dxdiag-<host>-<stamp>.xml'
+
+    Assert-True $block.Available 'the parsed XML block is available'
+    Assert-Equal 'ok' $block.State 'a parsed document is ok'
+    Assert-Match ([string]$block.File) '\.xml$' 'the block points at the .xml artifact'
+    Assert-True (Test-Path -LiteralPath $block.File) 'the .xml artifact exists'
+
+    # (b) accented and quoted values survive, with no locale-specific label.
+    Assert-Equal 'Windows 11 Pro 64-bit (10.0, Build 26200) — Sistema de «JoSé''s PC»' $block.OperatingSystem 'the accented, quoted OS string is read intact'
+    Assert-Equal 'Intel(R) Core(TM) i7-11700 @ 2.50GHz (16 CPUs), ~2.5GHz' $block.Processor 'the processor string is read'
+    Assert-Equal '32768MB RAM' $block.Memory 'the memory string is read'
+
+    # (c) two adapters produce two entries, each with its own driver data.
+    $devices = @($block.DisplayDevices)
+    Assert-Count $devices 2 'both display adapters are reported'
+    Assert-Equal 'Intel(R) UHD Graphics 750' $devices[0].CardName 'the first adapter keeps its name'
+    Assert-Equal '31.0.101.2134' $devices[0].DriverVersion 'the first adapter keeps its driver version'
+    Assert-Equal '5/3/2024 21:00:00' $devices[0].DriverDate 'the first adapter keeps its driver date'
+    Assert-Equal 'NVIDIA GeForce RTX 5070 "Gaming OC" — Edición española' $devices[1].CardName 'the second adapter keeps its quoted, accented name'
+    Assert-Equal '32.0.16.2124' $devices[1].DriverVersion 'the second adapter keeps its driver version'
+    Assert-Equal '6/11/2026 21:00:00' $devices[1].DriverDate 'the second adapter keeps its driver date'
+    Assert-NotEqual $devices[0].CardName $devices[1].CardName 'the two entries are not the same adapter twice'
+
+    # (d) a missing element is "unavailable (<reason>)", never an empty string.
+    Reset-PcDiagStubs
+    Set-PcDiagDxDiagXml -Name 'dxdiag-missing-element' | Out-Null
+    $partial = Get-DiagDxDiag -OutputDir (New-TestTempDir) -HostName 'test-host' -Stamp '20260101-120100'
+    Assert-Count @($partial.DisplayDevices) 1 'the adapter is still reported'
+    Assert-Equal 'unavailable (missing element DedicatedMemory)' $partial.DisplayDevices[0].DedicatedMemory 'a missing DedicatedMemory degrades to unavailable'
+    Assert-False ([string]::IsNullOrWhiteSpace([string]$partial.DisplayDevices[0].DedicatedMemory)) 'the missing field is never blank'
+    Assert-Equal 'AMD Radeon RX 6600' $partial.DisplayDevices[0].CardName 'the fields that are present are still read'
+    Assert-Equal '31.0.12027.9001' $partial.DisplayDevices[0].DriverVersion 'the driver version is still read next to the missing field'
+
+    # (e) a UTF-16 document decodes to the same accented value.
+    Reset-PcDiagStubs
+    Set-PcDiagDxDiagXml -Name 'dxdiag-es-cl' -Encoding utf16 | Out-Null
+    $utf16 = Get-DiagDxDiag -OutputDir (New-TestTempDir) -HostName 'test-host' -Stamp '20260101-120200'
+    Assert-True $utf16.Available 'the UTF-16 document is parsed'
+    Assert-Equal $block.OperatingSystem $utf16.OperatingSystem 'the BOM and the encoding are honoured, not decoded as ANSI'
+
+    # (f) an invalid document degrades and the snapshot keeps being built.
+    Reset-PcDiagStubs
+    Set-PcDiagFixture -Name 'whea-mixed-system-log' | Out-Null
+    Set-PcDiagDxDiagXml -Name 'dxdiag-truncated' | Out-Null
+    $brokenDir = New-TestTempDir
+    $snapshot = New-DiagSnapshot -Days 30 -TopFolders 3 -MaxEventsPerCategory 20 -Mode Full `
+        -OutputDir $brokenDir -StatePath (Join-Path -Path $brokenDir -ChildPath 'state.json') -FolderBudgetSeconds 2
+    Assert-NotNull $snapshot.dxdiag 'the snapshot still carries a dxdiag block'
+    Assert-Match ([string]$snapshot.dxdiag.State) '^unavailable \(xml not parsable' 'an unparsable document degrades to unavailable'
+    Assert-False $snapshot.dxdiag.Available 'an unparsable document is not reported as available'
+    Assert-Match ([string]$snapshot.dxdiag.OperatingSystem) '^unavailable \(' 'an unparsable document fills the fields with a reason'
+    Assert-False ([string]::IsNullOrWhiteSpace([string]$snapshot.dxdiag.OperatingSystem)) 'the degraded field is never blank'
+
+    $section = @(Get-DiagReportSection01 -Snapshot $snapshot)
+    Assert-GreaterOrEqual $section.Count 1 'the report section is still rendered'
+    Assert-Count @($section | Where-Object { $_ -match 'dxdiag: unavailable \(xml not parsable' }) 1 'the report says the dxdiag block degraded instead of failing the run'
 }
 
 function Test-T13BaselineOutOfWindow {
@@ -1160,6 +1237,7 @@ $script:TestCases = @(
     @{ Name = 'T11-listing-truncation';        Run = { Test-T11ListingTruncation } },
     @{ Name = 'T12-quick-line-ceiling';        Run = { Test-T12QuickCeiling } },
     @{ Name = 'T12b-quick-never-runs-dxdiag';  Run = { Test-T12bQuickNeverRunsDxDiag } },
+    @{ Name = 'T12c-dxdiag-xml-locale-independent'; Run = { Test-T12cDxDiagXmlLocaleIndependent } },
     @{ Name = 'T13-baseline-out-of-window';    Run = { Test-T13BaselineOutOfWindow } },
     @{ Name = 'T14-whea-severity-labels';      Run = { Test-T14WheaSeverityLabels } },
     @{ Name = 'T15-locale-independent';        Run = { Test-T15LocaleIndependent } },

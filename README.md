@@ -80,7 +80,7 @@ Artifacts land in `.\reports\` by default:
 ```
 reports/
   pc-diagnostics-<host>-<timestamp>.txt    the report
-  dxdiag-<host>-<timestamp>.txt            when dxdiag was not skipped
+  dxdiag-<host>-<timestamp>.xml            dxdiag /x output, when not skipped
   state.json                               baseline for the next run
 ```
 

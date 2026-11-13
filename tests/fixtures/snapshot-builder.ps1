@@ -389,7 +389,18 @@ function New-TestSnapshot {
             NoDriverDate  = 0
         }
         $misc = [pscustomobject]@{ Available = $true; Trim = 'enabled'; UptimeHours = 51.2; WindowsBuild = '10.0.22631' }
-        $dxdiag = [pscustomobject]@{ Available = $true; Skipped = $false; State = 'ok'; KeyLines = @('Card name: Test GPU', 'Driver Version: 31.0.15.3623'); File = 'C:\temp\reports\dxdiag.txt' }
+        $dxdiag = [pscustomobject]@{
+            Available       = $true
+            Skipped         = $false
+            State           = 'ok'
+            Reason          = $null
+            OperatingSystem = 'Windows 11 Pro 64-bit (10.0, Build 26200)'
+            Processor       = 'Intel(R) Core(TM) i7-11700 @ 2.50GHz (16 CPUs), ~2.5GHz'
+            Memory          = '32768MB RAM'
+            DisplayDevices  = @([pscustomobject]@{ CardName = 'Test GPU'; ChipType = 'Test Chip'; DedicatedMemory = '12288 MB'; DriverVersion = '31.0.15.3623'; DriverDate = '6/1/2025 21:00:00' })
+            KeyLines        = @('OperatingSystem: Windows 11 Pro 64-bit (10.0, Build 26200)', 'DisplayDevice #1 CardName: Test GPU')
+            File            = 'C:\\temp\\reports\\dxdiag-test-host-20260101-000000.xml'
+        }
     } else {
         $system = [pscustomobject]@{ Available = $false; Reason = 'not collected' }
         $cpu = [pscustomobject]@{ Available = $false; Reason = 'not collected' }
@@ -402,7 +413,18 @@ function New-TestSnapshot {
         $update = [pscustomobject]@{ Available = $false; Reason = 'not collected'; LatestKbs = @(); Pending = $null; PendingState = 'unavailable (not collected)'; SearchDate = $null }
         $drivers = [pscustomobject]@{ Available = $false; Reason = 'not collected'; OldestDrivers = @(); NoDriverDate = 0 }
         $misc = [pscustomobject]@{ Available = $false; Reason = 'not collected'; Trim = 'unavailable (not collected)'; UptimeHours = $null; WindowsBuild = $null }
-        $dxdiag = [pscustomobject]@{ Available = $false; Skipped = $true; State = 'skipped (-SkipDxDiag)'; Reason = 'skipped'; KeyLines = @(); File = $null }
+        $dxdiag = [pscustomobject]@{
+            Available       = $false
+            Skipped         = $true
+            State           = 'skipped (-SkipDxDiag)'
+            Reason          = 'skipped'
+            OperatingSystem = 'unavailable (skipped)'
+            Processor       = 'unavailable (skipped)'
+            Memory          = 'unavailable (skipped)'
+            DisplayDevices  = @()
+            KeyLines        = @()
+            File            = $null
+        }
     }
 
     $cleanBoots = 0
