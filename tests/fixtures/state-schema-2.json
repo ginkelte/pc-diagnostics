@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "last_run_at": "2026-11-12T21:10:00-03:00",
+  "last_run_mode": "Full",
+  "host": "TEST-HOST",
+  "window_days": 30,
+  "elevated": true,
+  "off_provider_dropped": 0,
+  "counters": {
+    "whea_17": 0,
+    "whea_18": 0,
+    "whea_19": 0,
+    "whea_47": 0,
+    "stornvme_129": 0,
+    "disk_7": 0,
+    "disk_11": 0,
+    "disk_51": 0,
+    "disk_153": 0,
+    "tdr_4101": 0,
+    "tdr_4104": 0,
+    "kernel_power_41": 0,
+    "eventlog_6005": 0,
+    "eventlog_6006": 0,
+    "eventlog_6008": 0,
+    "app_error_1000": 0,
+    "wer_1001": 0,
+    "app_hang_1002": 0,
+    "dotnet_1026": 0
+  },
+  "wer": {
+    "events_seen": 184,
+    "unique_dumps": 12,
+    "unique_params": 0,
+    "unidentified": 0,
+    "repeats": 172,
+    "signatures": []
+  },
+  "volumes": [],
+  "nvme": [],
+  "boots": {
+    "clean": 3,
+    "dirty": 0
+  },
+  "fast_startup": true,
+  "dynamic_lighting": "not_present",
+  "windows": {
+    "caption": "Windows 11 Pro",
+    "build": "10.0.22631"
+  }
+}

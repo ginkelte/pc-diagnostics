@@ -1,0 +1,92 @@
+{
+  "fixture": "whea-mixed-system-log",
+  "logs": {
+    "System": [
+      {
+        "TimeCreated": "2026-10-20T08:11:02-03:00",
+        "Id": 17,
+        "ProviderName": "Microsoft-Windows-WHEA-Logger",
+        "Level": "Warning",
+        "Message": "A corrected hardware error has occurred. Component: PCI Express Root Port. Error Source: Advanced Error Reporting (PCI Express).",
+        "Data": {
+          "ErrorSource": "4",
+          "Severity": "Corrected",
+          "ErrorType": "PCI Express"
+        }
+      },
+      {
+        "TimeCreated": "2026-10-24T21:35:41-03:00",
+        "Id": 17,
+        "ProviderName": "Microsoft-Windows-WHEA-Logger",
+        "Level": "Warning",
+        "Message": "A corrected hardware error has occurred. Component: PCI Express Root Port. Error Source: Advanced Error Reporting (PCI Express).",
+        "Data": {
+          "ErrorSource": "4",
+          "Severity": "Corrected",
+          "ErrorType": "PCI Express"
+        }
+      },
+      {
+        "TimeCreated": "2026-10-26T12:00:00-03:00",
+        "Id": 19,
+        "ProviderName": "WindowsUpdateClient",
+        "Level": "Information",
+        "Message": "Installation Successful: Windows successfully installed the following update.",
+        "Data": {
+          "updateTitle": "2026-10 Cumulative Update (KB0000000)"
+        }
+      },
+      {
+        "TimeCreated": "2026-10-27T12:01:00-03:00",
+        "Id": 19,
+        "ProviderName": "WindowsUpdateClient",
+        "Level": "Information",
+        "Message": "Installation Successful: Windows successfully installed the following update.",
+        "Data": {
+          "updateTitle": "2026-10 Cumulative Update (KB0000000)"
+        }
+      },
+      {
+        "TimeCreated": "2026-10-28T12:02:00-03:00",
+        "Id": 19,
+        "ProviderName": "WindowsUpdateClient",
+        "Level": "Information",
+        "Message": "Installation Successful: Windows successfully installed the following update.",
+        "Data": {
+          "updateTitle": "2026-10 Cumulative Update (KB0000000)"
+        }
+      },
+      {
+        "TimeCreated": "2026-10-28T06:20:00-03:00",
+        "Id": 18,
+        "ProviderName": "TPM",
+        "Level": "Information",
+        "Message": "The TPM is ready for use.",
+        "Data": {
+          "TPMVersion": "2.0"
+        }
+      },
+      {
+        "TimeCreated": "2026-10-29T06:21:00-03:00",
+        "Id": 18,
+        "ProviderName": "TPM",
+        "Level": "Information",
+        "Message": "The TPM is ready for use.",
+        "Data": {
+          "TPMVersion": "2.0"
+        }
+      },
+      {
+        "TimeCreated": "2026-11-02T03:04:05-03:00",
+        "Id": 51,
+        "ProviderName": "disk",
+        "Level": "Warning",
+        "Message": "An error was detected on device \\Device\\Harddisk1\\DR1 during a paging operation.",
+        "Data": {
+          "param1": "\\Device\\Harddisk1\\DR1"
+        }
+      }
+    ],
+    "Application": []
+  }
+}
