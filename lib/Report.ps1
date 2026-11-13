@@ -839,7 +839,18 @@ function Get-DiagReportSection10 {
     }
 
     $bugchecks = @($power.BugcheckCodes)
-    if ($bugchecks.Count -eq 0) {
+    # RF-27 (same rule as section 09): an empty list only means "no bugcheck" when
+    # the Kernel-Power 41 query actually returned. A failed query (timeout, access
+    # denied) leaves total = $null and an empty list, and "none in the window"
+    # would then assert the exact opposite of what is known.
+    $kpCounter = Get-DiagReportCounter -Snapshot $Snapshot -Key 'kernel_power_41'
+    if (-not $kpCounter.present) {
+        Add-DiagReportField -Buffer $b -Label 'Bugcheck' -Value 'unavailable (Kernel-Power 41 query not run)'
+    } elseif ($null -eq $kpCounter.total) {
+        $reason = 'query failed'
+        if (Test-DiagReportValue -Value $kpCounter.error) { $reason = [string]$kpCounter.error }
+        Add-DiagReportField -Buffer $b -Label 'Bugcheck' -Value ('unavailable (' + (ConvertTo-DiagSingleLine -Text $reason -MaxLength 120) + ')')
+    } elseif ($bugchecks.Count -eq 0) {
         # Not "0": a zero count here would be indistinguishable from a broken
         # query, and the count lives in section 07 with its query line.
         Add-DiagReportField -Buffer $b -Label 'Bugcheck' -Value 'none in the window (no Microsoft-Windows-Kernel-Power 41 event)'

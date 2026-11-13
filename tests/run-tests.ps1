@@ -489,6 +489,45 @@ function Test-T10UnavailableNotZero {
     Assert-Equal 0 $state.counters['whea_18'] 'a successful query with no event stores a real 0'
 }
 
+function Test-T10bBugcheckFailedQuery {
+    <#
+      Section 10 must never turn a failed Kernel-Power 41 query into "no
+      bugchecks". total = $null is the shape a timeout or an access-denied leaves
+      behind; Get-DiagBugchecks then receives @() and the section used to print
+      "none in the window", which is the opposite of what is known (RF-27, same
+      rule as section 09).
+    #>
+    Reset-TestEnvironment
+
+    # Failed query: the counter exists but carries no total.
+    $failed = New-TestSnapshot -Counters (New-TestCounters -Values @{ kernel_power_41 = @{ total = $null; since_last_run = $null; error = 'Access is denied' } })
+    $failed.power.BugcheckCodes = @()
+    $failedText = (@(Get-DiagReportSection10 -Snapshot $failed) -join "`n")
+    Assert-Match $failedText '(?m)^\s+Bugcheck\s+: unavailable \(Access is denied\)$' 'a failed query renders unavailable with its reason'
+    Assert-NotMatch $failedText 'none in the window' 'a failed query never claims there were no bugchecks'
+
+    # No error text: the state is still unavailable, never a bare "none".
+    $bare = New-TestSnapshot -Counters (New-TestCounters -Values @{ kernel_power_41 = @{ total = $null } })
+    $bare.power.BugcheckCodes = @()
+    $bareText = (@(Get-DiagReportSection10 -Snapshot $bare) -join "`n")
+    Assert-Match $bareText '(?m)^\s+Bugcheck\s+: unavailable \(query failed\)$' 'a failed query without error text still reads unavailable'
+
+    # Absent counter (the event pass never ran): unknown, not "none".
+    $noCounter = New-TestSnapshot
+    $noCounter.events.Counters = @{}
+    $noCounter.power.BugcheckCodes = @()
+    $noCounterText = (@(Get-DiagReportSection10 -Snapshot $noCounter) -join "`n")
+    Assert-Match $noCounterText '(?m)^\s+Bugcheck\s+: unavailable \(Kernel-Power 41 query not run\)$' 'a counter that was never collected is not a clean bill of health'
+    Assert-NotMatch $noCounterText 'none in the window' 'an unqueried counter never claims there were no bugchecks'
+
+    # A real zero (query succeeded, found nothing) still says so: the fix must not
+    # turn every honest empty window into "unavailable".
+    $realZero = New-TestSnapshot
+    $realZero.power.BugcheckCodes = @()
+    $zeroText = (@(Get-DiagReportSection10 -Snapshot $realZero) -join "`n")
+    Assert-Match $zeroText '(?m)^\s+Bugcheck\s+: none in the window \(no Microsoft-Windows-Kernel-Power 41 event\)$' 'a successful empty query still reads none in the window'
+}
+
 function Test-T11ListingTruncation {
     <#
       RF-16: a truncated listing prints the exact omitted count, and a zero count
@@ -953,6 +992,7 @@ $script:TestCases = @(
     @{ Name = 'T06b-wer-accounting';           Run = { Test-T06bWerAccounting } },
     @{ Name = 'T07-listing-cap-and-size';      Run = { Test-T07ListingCapAndSize } },
     @{ Name = 'T10-unavailable-not-zero';      Run = { Test-T10UnavailableNotZero } },
+    @{ Name = 'T10b-bugcheck-failed-query';    Run = { Test-T10bBugcheckFailedQuery } },
     @{ Name = 'T11-listing-truncation';        Run = { Test-T11ListingTruncation } },
     @{ Name = 'T12-quick-line-ceiling';        Run = { Test-T12QuickCeiling } },
     @{ Name = 'T12b-quick-never-runs-dxdiag';  Run = { Test-T12bQuickNeverRunsDxDiag } },
