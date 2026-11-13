@@ -437,11 +437,19 @@ function Add-DiagNvmeSmart {
     foreach ($d in @($Disks)) {
         if ($null -eq $d) { continue }
         if ($d.BusType -eq 'NVMe') {
-            $number = $null
-            try { $number = [int]$d.DiskNumber } catch { $number = $null }
-            if ($null -eq $number) {
+            # [int]$null is 0 and does not throw: casting would silently read
+            # disk 0's SMART and attribute it to this disk - a fabricated value
+            # indistinguishable from a measured one. Parse the text instead, so
+            # a missing or malformed number is refused rather than guessed.
+            $raw = Get-DiagPropValue -Object $d -Name 'DiskNumber' -Default $null
+            $rawText = ''
+            if ($null -ne $raw) { $rawText = [string]$raw }
+            $number = 0
+            $parsed = $false
+            try { $parsed = [int]::TryParse($rawText, [ref]$number) } catch { $parsed = $false }
+            if (-not $parsed -or $number -lt 0) {
                 $d.Smart = $null
-                Add-DiagProblem -Collector 'nvme' -Reason 'disk number unavailable'
+                Add-DiagProblem -Collector 'nvme' -Reason ('disk number unavailable (DiskNumber=''' + $rawText + ''')')
             } else {
                 $d.Smart = Get-NvmeSmart -DiskNumber $number -PhysicalDisk $d.PhysicalDisk
             }

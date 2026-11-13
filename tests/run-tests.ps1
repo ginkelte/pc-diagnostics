@@ -450,6 +450,57 @@ function Test-T07ListingCapAndSize {
 }
 
 # ===========================================================================
+# Storage / NVMe (RF-08, RF-09)
+# ===========================================================================
+
+function Test-T08NvmeDiskNumberRefused {
+    <#
+      A disk number that is missing, unparsable or negative must never be
+      replaced by a default. [int]$null is 0, so a cast would read disk 0's
+      SMART and attribute it to another disk: the report would show a real
+      looking temperature for hardware that was never queried. The collector has
+      to record the defect and query nothing.
+    #>
+    Reset-TestEnvironment
+    $null = Set-PcDiagFixtureObject -Fixture ([pscustomobject]@{ nvme_health_log = $true })
+
+    # No DiskNumber property at all, a non-numeric one, and a negative one.
+    $missing = [pscustomobject]@{ FriendlyName = 'Missing Number NVMe'; BusType = 'NVMe'; Smart = $null }
+    $garbage = [pscustomobject]@{ FriendlyName = 'Garbage Number NVMe'; BusType = 'NVMe'; DiskNumber = 'not-a-number'; Smart = $null }
+    $negative = [pscustomobject]@{ FriendlyName = 'Negative Number NVMe'; BusType = 'NVMe'; DiskNumber = -3; Smart = $null }
+    $known = [pscustomobject]@{ FriendlyName = 'Known Number NVMe'; BusType = 'NVMe'; DiskNumber = 4; Smart = $null }
+    $sata = [pscustomobject]@{ FriendlyName = 'SATA Device'; BusType = 'SATA'; DiskNumber = 2; Smart = $null }
+
+    $result = @(Add-DiagNvmeSmart -Disks @($missing, $garbage, $negative, $known, $sata))
+    Assert-Count $result 5 'every disk is returned'
+
+    Assert-Null $result[0].Smart 'a disk without a number gets no SMART at all'
+    Assert-Null $result[1].Smart 'an unparsable disk number gets no SMART at all'
+    Assert-Null $result[2].Smart 'a negative disk number gets no SMART at all'
+    Assert-NotNull $result[3].Smart 'the disk that names a valid number gets its SMART'
+    Assert-Null $result[4].Smart 'a non-NVMe disk keeps Smart = $null'
+
+    $problems = @(Get-DiagProblems | Where-Object { $_.Collector -eq 'nvme' })
+    Assert-Count $problems 3 'each refused disk is recorded as a problem'
+    foreach ($problem in $problems) {
+        Assert-Match $problem.Reason 'disk number unavailable' 'the problem names the real defect'
+        Assert-Match $problem.Reason 'DiskNumber' 'the problem carries the raw value it received'
+    }
+    # $problems holds objects, whose ToString() is empty: join the reasons.
+    $reasons = (@($problems | ForEach-Object { [string]$_.Reason }) -join "`n")
+    Assert-Match $reasons "DiskNumber='not-a-number'" 'the unparsable value is quoted verbatim'
+    Assert-Match $reasons "DiskNumber='-3'" 'the negative value is quoted verbatim'
+    Assert-Match $reasons "DiskNumber=''" 'the absent value is quoted as empty, not as 0'
+
+    $calls = @(Get-PcDiagCalls -Cmdlet 'Get-NvmeHealthLog')
+    Assert-Count $calls 1 'the health log is fetched once, only for the disk that has a number'
+    Assert-Equal 4 ([int]$calls[0].Arguments.DiskNumber) 'the fetch used the parsed number'
+    foreach ($call in $calls) {
+        Assert-NotEqual 0 ([int]$call.Arguments.DiskNumber) 'no fetch guessed disk 0'
+    }
+}
+
+# ===========================================================================
 # Renderers (RF-27, RF-16, RF-28)
 # ===========================================================================
 
@@ -991,6 +1042,7 @@ $script:TestCases = @(
     @{ Name = 'T06-wer-unidentified';          Run = { Test-T06WerUnidentified } },
     @{ Name = 'T06b-wer-accounting';           Run = { Test-T06bWerAccounting } },
     @{ Name = 'T07-listing-cap-and-size';      Run = { Test-T07ListingCapAndSize } },
+    @{ Name = 'T08-nvme-disk-number-refused';  Run = { Test-T08NvmeDiskNumberRefused } },
     @{ Name = 'T10-unavailable-not-zero';      Run = { Test-T10UnavailableNotZero } },
     @{ Name = 'T10b-bugcheck-failed-query';    Run = { Test-T10bBugcheckFailedQuery } },
     @{ Name = 'T11-listing-truncation';        Run = { Test-T11ListingTruncation } },
